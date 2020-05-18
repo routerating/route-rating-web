@@ -29,7 +29,6 @@
       "packageName": "@routerating/api",
       "projectFolder": "tools/api",
       "shouldPublish": true,
-      "versionPolicyName": "tools",
       "reviewCategory": "tools"
     }
     //
