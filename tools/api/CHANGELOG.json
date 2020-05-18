@@ -1,0 +1,17 @@
+{
+  "name": "@routerating/api",
+  "entries": [
+    {
+      "version": "0.0.2",
+      "tag": "@routerating/api_v0.0.2",
+      "date": "Mon, 18 May 2020 02:22:26 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Added index.js"
+          }
+        ]
+      }
+    }
+  ]
+}
