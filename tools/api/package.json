@@ -1,0 +1,10 @@
+{
+  "name": "@routerating/api",
+  "version": "0.0.1",
+  "description": "API package for Route Rating.",
+  "main": "index.js",
+  "repository": "https://github.com/LukeShay/route-rating-api.git",
+  "author": "Luke Shay <https://github.com/LukeShay>",
+  "license": "MIT",
+  "private": false
+}
