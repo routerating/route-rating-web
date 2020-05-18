@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "packageName": "@routerating/api",
+      "comment": "Set npm package to public.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "@routerating/api",
+  "email": "shay.luke17@gmail.com"
+}
