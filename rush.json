@@ -30,6 +30,12 @@
       "projectFolder": "tools/api",
       "shouldPublish": true,
       "reviewCategory": "tools"
+    },
+    {
+      "packageName": "@routerating/entities",
+      "projectFolder": "tools/entities",
+      "shouldPublish": true,
+      "reviewCategory": "tools"
     }
     //
     // {

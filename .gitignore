@@ -61,3 +61,4 @@ jspm_packages/
 # Rush temporary files
 common/temp/
 **/.rush/temp/
+dist/
