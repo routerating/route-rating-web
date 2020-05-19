@@ -1,6 +1,6 @@
 {
   "name": "@routerating/api",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "API package for Route Rating.",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/",

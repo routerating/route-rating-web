@@ -23,7 +23,3 @@ export { Session } from './session';
 export { RecaptchaUser, User } from './user';
 
 export { Wall, WallTypes } from './wall';
-
-import * as Events from './events';
-
-export { Events };
