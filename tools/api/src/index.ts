@@ -11,7 +11,7 @@ export interface Request {
 
 export function createJsonRequest(
   path: string,
-  queryParams: string,
+  queryParams: string | undefined,
   method: 'PUT' | 'POST' | 'GET',
   authorization: string | undefined,
   refresh: string | undefined,

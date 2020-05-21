@@ -24,7 +24,8 @@
   "scripts": {
     "lint": "eslint --ext .ts --ignore-path ../../.gitignore . ",
     "format": "yarn lint --fix",
-    "build": "tsc"
+    "build": "tsc",
+    "test": "exit 0"
   },
   "main": "dist/index.js",
   "types": "dist/index.d.ts"
