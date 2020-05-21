@@ -1,5 +1,5 @@
 {
-  "extends": "@lukeshay/typescript-config/tsconfig",
+  "extends": "@lukeshay/typescript-config/tsconfig-web",
   "include": ["./src/**/*.js", "./src/**/*.ts"],
   "exclude": [
     "./node_modules/**/*",

@@ -1,0 +1,25 @@
+{
+  "folders": [
+    {
+      "name": "Project Files",
+      "path": "."
+    },
+    {
+      "name": "Github Files",
+      "path": "./.git"
+    },
+    {
+      "name": "Rush",
+      "path": "./common"
+    },
+    {
+      "name": "@lukeshay/entities",
+      "path": "./tools/entities"
+    },
+    {
+      "name": "@lukeshay/api",
+      "path": "./tools/api"
+    }
+  ],
+  "settings": {}
+}

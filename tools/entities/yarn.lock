@@ -55,32 +55,6 @@
   resolved "https://registry.yarnpkg.com/@lukeshay/typescript-config/-/typescript-config-0.0.2.tgz#df0cf157b132d05fbecebfe8fcee4a59c97a77e3"
   integrity sha512-qXl3aU4sXYBggoo5izywCSj6YD70RBijj6/4v0JrEvgGLgpQCji37t7fCyAHzzzY0LIjo8aO9OcH1Eo/7D0V1Q==
 
-"@rush-temp/api@file:./projects/api.tgz":
-  version "0.0.0"
-  resolved "file:./projects/api.tgz"
-  dependencies:
-    "@lukeshay/eslint-config-typescript" "^0.0.7"
-    "@lukeshay/prettier-config" "^0.0.1"
-    "@lukeshay/typescript-config" "^0.0.2"
-    eslint "^6.8.0"
-    eslint-config-prettier "^6.10.0"
-    eslint-plugin-prettier "^3.1.2"
-    prettier "^1.19.1"
-    typescript "^3.9.2"
-
-"@rush-temp/entities@file:./projects/entities.tgz":
-  version "0.0.0"
-  resolved "file:./projects/entities.tgz"
-  dependencies:
-    "@lukeshay/eslint-config-typescript" "^0.0.7"
-    "@lukeshay/prettier-config" "^0.0.1"
-    "@lukeshay/typescript-config" "^0.0.2"
-    eslint "^6.8.0"
-    eslint-config-prettier "^6.10.0"
-    eslint-plugin-prettier "^3.1.2"
-    prettier "^1.19.1"
-    typescript "^3.9.2"
-
 "@types/color-name@^1.1.1":
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/@types/color-name/-/color-name-1.1.1.tgz#1c1261bbeaa10a8055bbc5d8ab84b7b2afc846a0"
@@ -95,11 +69,6 @@
   version "7.0.4"
   resolved "https://registry.yarnpkg.com/@types/json-schema/-/json-schema-7.0.4.tgz#38fd73ddfd9b55abb1e1b2ed578cb55bd7b7d339"
   integrity sha512-8+KAKzEvSUdeo+kmqnKrqgeE+LcA0tjYWFY7RPProVYwnqDjukzO+3b6dLD56rYX5TdWejnEOLJYOIeh4CXKuA==
-
-"@types/node@^14.0.4":
-  version "14.0.4"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-14.0.4.tgz#43a63fc5edce226bed106b31b875165256271107"
-  integrity sha512-k3NqigXWRzQZVBDS5D1U70A5E8Qk4Kh+Ha/x4M8Bt9pF0X05eggfnC9+63Usc9Q928hRUIpIhTQaXsZwZBl4Ew==
 
 "@typescript-eslint/eslint-plugin@^2.22.0":
   version "2.34.0"
@@ -1009,9 +978,9 @@ type-fest@^0.8.1:
   integrity sha512-4dbzIzqvjtgiM5rw1k5rEHtBANKmdudhGyBEajN01fEyhaAIhsoKNy6y7+IN93IfpFtwY9iqi7kD+xwKhQsNJA==
 
 typescript@^3.9.2:
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.2.tgz#64e9c8e9be6ea583c54607677dd4680a1cf35db9"
-  integrity sha512-q2ktq4n/uLuNNShyayit+DTobV2ApPEo/6so68JaD5ojvc/6GClBipedB9zNWYxRSAlZXAe405Rlijzl6qDiSw==
+  version "3.9.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.9.3.tgz#d3ac8883a97c26139e42df5e93eeece33d610b8a"
+  integrity sha512-D/wqnB2xzNFIcoBG9FG8cXRDjiqSTbG2wd8DMZeQyJlP1vfTkIxH4GKveWaEBYySKIg+USu+E+EDIR47SqnaMQ==
 
 uri-js@^4.2.2:
   version "4.2.2"

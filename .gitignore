@@ -62,3 +62,4 @@ jspm_packages/
 common/temp/
 **/.rush/temp/
 dist/
+.shadowroot/
