@@ -1,0 +1,31 @@
+{
+  "name": "@lukeshay/PACKAGE_NAME",
+  "version": "0.0.5",
+  "description": "My PACKAGE_NAME configuration",
+  "main": "index.js",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "access": "public"
+  },
+  "scripts": {
+    "build": "exit 0",
+    "clean": "rm -rf .rush *.log",
+    "format": "exit 0",
+    "lint": "exit 0",
+    "test": "exit 0",
+    "test:coverage": "exit 0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LukeShay/lukeshay-web.git"
+  },
+  "author": "Luke Shay <https://github.com/LukeShay>",
+  "license": "MIT",
+  "dependencies": {
+    "prettier": "^2.0.5",
+    "eslint": "^7.0.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.2"
+  },
+  "peerDependencies": {}
+}

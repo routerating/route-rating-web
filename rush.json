@@ -1,7 +1,3 @@
-/**
- * This is the main configuration file for Rush.
- * For full documentation, please see https://rushjs.io
- */
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
 
@@ -16,9 +12,7 @@
   },
 
   "eventHooks": {
-    "preRushInstall": [
-      // "common/scripts/pre-rush-install.js"
-    ],
+    "preRushInstall": [],
     "postRushInstall": [],
     "preRushBuild": [],
     "postRushBuild": []
@@ -27,27 +21,15 @@
   "projects": [
     {
       "packageName": "@routerating/api",
-      "projectFolder": "tools/api",
+      "projectFolder": "sdks/api",
       "shouldPublish": true,
-      "reviewCategory": "tools"
+      "reviewCategory": "sdks"
     },
     {
       "packageName": "@routerating/entities",
-      "projectFolder": "tools/entities",
+      "projectFolder": "libraries/entities",
       "shouldPublish": true,
-      "reviewCategory": "tools"
+      "reviewCategory": "libraries"
     }
-    //
-    // {
-    //   "packageName": "my-controls",
-    //   "projectFolder": "libraries/my-controls",
-    //   "reviewCategory": "production"
-    // },
-    //
-    // {
-    //   "packageName": "my-toolchain",
-    //   "projectFolder": "tools/my-toolchain",
-    //   "reviewCategory": "tools"
-    // }
   ]
 }

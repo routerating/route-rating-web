@@ -2,7 +2,11 @@
   "folders": [
     {
       "name": "Project Files",
-      "path": "."
+      "path": "./.shadowroot"
+    },
+    {
+      "name": "Scripts",
+      "path": "scripts"
     },
     {
       "name": "Github Files",
@@ -13,11 +17,11 @@
       "path": "./common"
     },
     {
-      "name": "@lukeshay/entities",
+      "name": "@routerating/entities",
       "path": "./tools/entities"
     },
     {
-      "name": "@lukeshay/api",
+      "name": "@routerating/api",
       "path": "./tools/api"
     }
   ],

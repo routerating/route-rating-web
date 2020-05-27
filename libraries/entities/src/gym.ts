@@ -1,4 +1,4 @@
-import { Wall } from '.';
+import { Wall } from './wall';
 
 export interface Gym {
   address: string;

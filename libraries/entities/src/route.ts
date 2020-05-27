@@ -1,4 +1,4 @@
-import { WallTypes } from '.';
+import { WallTypes } from './wall';
 
 export interface Route {
   averageGrade: string;

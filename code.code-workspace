@@ -1,0 +1,37 @@
+{
+  "folders": [
+    {
+      "name": "@routerating/api",
+      "path": "sdks/api"
+    },
+    {
+      "name": "@routerating/entities",
+      "path": "libraries/entities"
+    },
+    {
+      "name": "Documentation",
+      "path": "docs"
+    },
+    {
+      "name": "Github Settings",
+      "path": ".github"
+    },
+    {
+      "name": "Project Files",
+      "path": "./.shadowroot"
+    },
+    {
+      "name": "Project Scripts",
+      "path": "scripts"
+    },
+    {
+      "name": "Rush",
+      "path": "common"
+    },
+    {
+      "name": "VS Code Settings",
+      "path": ".vscode"
+    }
+  ],
+  "settings": {}
+}
