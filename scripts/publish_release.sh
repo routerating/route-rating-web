@@ -25,7 +25,7 @@ for D in `find tools -type d -maxdepth 1 -mindepth 1`
 do
   cd "${D}"
   V=$(npm view . version)
-  git tag "@lukeshay/${D:6}_${V}"
+  git tag "@routerating/${D:6}_v${V}"
   cd ../..
 done
 

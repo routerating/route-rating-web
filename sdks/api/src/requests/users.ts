@@ -10,8 +10,34 @@ export function login(email: string, password: string): Promise<Response> {
   );
 }
 
-export function createBasic(user: User): Promise<Response> {
+export function createBasicUser(user: User): Promise<Response> {
   return sendRequest(
-    createJsonRequest('auth', undefined, 'POST', undefined, undefined, user)
+    createJsonRequest(
+      'users/create',
+      undefined,
+      'POST',
+      undefined,
+      undefined,
+      user
+    )
+  );
+}
+
+export function createAdminUser(user: User): Promise<Response> {
+  return sendRequest(
+    createJsonRequest(
+      'users/create/admin',
+      undefined,
+      'POST',
+      undefined,
+      undefined,
+      user
+    )
+  );
+}
+
+export function updateUser(user: User): Promise<Response> {
+  return sendRequest(
+    createJsonRequest('users', undefined, 'PUT', undefined, undefined, user)
   );
 }
