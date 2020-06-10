@@ -1,12 +1,16 @@
 {
   "folders": [
     {
-      "name": "@routerating/api",
-      "path": "sdks/api"
+      "name": "@routerating/requests",
+      "path": "sdks/requests"
     },
     {
       "name": "@routerating/entities",
       "path": "libraries/entities"
+    },
+    {
+      "name": "@routerating/web",
+      "path": "apps/web"
     },
     {
       "name": "Documentation",
