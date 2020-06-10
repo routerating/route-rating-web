@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "@routerating/web",
   "private": true,
   "version": "0.0.1",
   "description": "Stencil App Starter",
@@ -8,11 +8,23 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate"
+    "generate": "stencil generate",
+    "lint": "eslint ./src --ext .ts"
   },
   "devDependencies": {
     "@stencil/core": "^1.12.2",
-    "@stencil/router": "^1.0.1"
+    "@stencil/eslint-plugin": "^0.3.1",
+    "@stencil/router": "^1.0.1",
+    "@stencil/sass": "^1.3.1",
+    "@types/jest": "^26.0.0",
+    "@typescript-eslint/eslint-plugin": "^3.2.0",
+    "@typescript-eslint/parser": "^3.2.0",
+    "eslint": "^7.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-react": "^7.20.0",
+    "prettier": "^2.0.5",
+    "workbox-build": "4.3.1"
   },
   "license": "MIT"
 }
