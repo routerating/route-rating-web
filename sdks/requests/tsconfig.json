@@ -1,0 +1,14 @@
+{
+  "extends": "@lukeshay/typescript-config/tsconfig-web",
+  "include": ["./src/**/*.js", "./src/**/*.ts"],
+  "exclude": [
+    "./node_modules/**/*",
+    "./src/**/__tests__/**/*",
+    "./src/**/*.spec.*",
+    "./src/**/*.test.*"
+  ],
+  "compilerOptions": {
+    "outDir": "dist",
+    "declaration": true
+  }
+}
