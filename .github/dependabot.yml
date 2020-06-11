@@ -1,6 +1,6 @@
 version: 2
 updates:
-  - package-ecosystem: javascript
+  - package-ecosystem: npm
     directory: "/apps/web"
     open-pull-requests-limit: 5
     labels:
@@ -9,7 +9,7 @@ updates:
       - "automerge"
     schedule:
       interval: daily
-  - package-ecosystem: javascript
+  - package-ecosystem: npm
     directory: "/libraries/entities"
     open-pull-requests-limit: 5
     labels:
@@ -18,7 +18,7 @@ updates:
       - "automerge"
     schedule:
       interval: daily
-  - package-ecosystem: javascript
+  - package-ecosystem: npm
     directory: "/sdks/requests"
     open-pull-requests-limit: 5
     labels:
