@@ -1,17 +1,29 @@
 version: 2
 updates:
-- package-ecosystem: npm
+- package-ecosystem: javascript
   directory: "/apps/web"
   schedule:
     interval: daily
   open-pull-requests-limit: 5
-- package-ecosystem: npm
+  labels:
+    - "npm"
+    - "dependencies"
+    - "automerge"
+- package-ecosystem: javascript
   directory: "/libraries/entities"
   schedule:
     interval: daily
   open-pull-requests-limit: 5
-- package-ecosystem: npm
+  labels:
+    - "npm"
+    - "dependencies"
+    - "automerge"
+- package-ecosystem: javascript
   directory: "/sdks/requests"
-  schedule:
+  schedule: "daily"
     interval: daily
   open-pull-requests-limit: 5
+  labels:
+    - "npm"
+    - "dependencies"
+    - "automerge"
