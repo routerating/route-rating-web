@@ -45,7 +45,7 @@
   },
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rollup -c --silent --strictDeprecations --minifyInternalExports --inlineDynamicImports",
     "format": "yarn lint --fix",
     "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
     "test": "jest",

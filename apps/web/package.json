@@ -22,10 +22,10 @@
   "private": true,
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "scripts": {
-    "build": "stencil build",
+    "build": "stencil build --prerender --log --stats",
     "format": "yarn lint --fix",
     "generate": "stencil generate",
-    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
+    "lint": "eslint src/ --ext .ts,.tsx --ignore-path ../../.gitignore . ",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"

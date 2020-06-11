@@ -15,5 +15,6 @@
       "error"
     ],
     "react/jsx-no-bind": 0
-  }
+  },
+  "ignorePatterns": "stencil.config.ts"
 }
