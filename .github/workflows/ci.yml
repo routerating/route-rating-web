@@ -5,7 +5,7 @@ jobs:
   change:
     runs-on: ubuntu-latest
     if: github.event.label.name != 'stage-release'
-    Name: Change
+    name: Change
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
