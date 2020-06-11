@@ -1,0 +1,17 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/apps/web"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 5
+- package-ecosystem: npm
+  directory: "/libraries/entities"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 5
+- package-ecosystem: npm
+  directory: "/sdks/requests"
+  schedule:
+    interval: daily
+  open-pull-requests-limit: 5
