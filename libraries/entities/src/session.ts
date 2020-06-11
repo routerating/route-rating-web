@@ -1,7 +1,7 @@
-import { RouteRatingJwt } from './routeRatingJwt';
+import { RouteRatingJwt } from './routeRatingJwt'
 
 export interface Session {
-  id: string;
-  tokens: RouteRatingJwt;
-  userId: string;
+  id: string
+  tokens: RouteRatingJwt
+  userId: string
 }

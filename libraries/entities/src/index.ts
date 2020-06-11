@@ -1,15 +1,15 @@
-export { AuthBody } from './authBody';
+export { AuthBody } from './authBody'
 
-export { Gym } from './gym';
+export { Gym } from './gym'
 
-export { Route } from './route';
+export { Route } from './route'
 
-export { RouteRating } from './rating';
+export { RouteRating } from './rating'
 
-export { RouteRatingJwt } from './routeRatingJwt';
+export { RouteRatingJwt } from './routeRatingJwt'
 
-export { Session } from './session';
+export { Session } from './session'
 
-export { RecaptchaUser, User } from './user';
+export { RecaptchaUser, User } from './user'
 
-export { Wall, WallTypes } from './wall';
+export { Wall, WallTypes } from './wall'

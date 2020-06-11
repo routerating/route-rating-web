@@ -1,21 +1,6 @@
 {
-  "name": "@routerating/entities",
-  "version": "0.0.2",
-  "description": "Entities package for Route Rating.",
-  "publishConfig": {
-    "registry": "https://registry.npmjs.org/",
-    "access": "public"
-  },
-  "files": [
-    "dist",
-    "README.md",
-    "CHANGELOG.md"
-  ],
-  "repository": "https://github.com/LukeShay/route-rating-api.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
-  "license": "MIT",
-  "private": false,
-  "dependencies": {},
+  "description": "Entities package for Route Rating.",
   "devDependencies": {
     "@lukeshay/eslint-config-typescript": "^1.0.2",
     "@lukeshay/typescript-config": "^1.0.0",
@@ -25,12 +10,26 @@
     "prettier": "^2.0.5",
     "typescript": "^3.9.2"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "license": "MIT",
+  "main": "dist/index.js",
+  "name": "@routerating/entities",
+  "private": false,
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "repository": "https://github.com/LukeShay/route-rating-web.git",
   "scripts": {
-    "lint": "eslint --ext .ts --ignore-path ../../.gitignore . ",
-    "format": "yarn lint --fix",
     "build": "tsc",
+    "format": "yarn lint --fix",
+    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
     "test": "exit 0"
   },
   "types": "dist/index.d.ts",
-  "main": "dist/index.js"
+  "version": "0.0.2"
 }

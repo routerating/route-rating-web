@@ -1,16 +1,6 @@
 {
-  "name": "@routerating/web",
-  "private": true,
-  "version": "0.0.1",
+  "author": "Luke Shay <https://github.com/LukeShay>",
   "description": "Stencil App Starter",
-  "scripts": {
-    "build": "stencil build",
-    "start": "stencil build --dev --watch --serve",
-    "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll",
-    "generate": "stencil generate",
-    "lint": "eslint ./src --ext .ts"
-  },
   "devDependencies": {
     "@stencil/core": "^1.12.2",
     "@stencil/eslint-plugin": "^0.3.1",
@@ -26,5 +16,18 @@
     "prettier": "^2.0.5",
     "workbox-build": "4.3.1"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "name": "@routerating/web",
+  "private": true,
+  "repository": "https://github.com/LukeShay/route-rating-web.git",
+  "scripts": {
+    "build": "stencil build",
+    "format": "yarn lint --fix",
+    "generate": "stencil generate",
+    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
+    "start": "stencil build --dev --watch --serve",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll"
+  },
+  "version": "0.0.1"
 }

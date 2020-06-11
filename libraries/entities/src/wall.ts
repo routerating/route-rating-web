@@ -1,11 +1,11 @@
-import { Route } from './route';
+import { Route } from './route'
 
 export interface Wall {
-  gymId: string;
-  id: string;
-  name: string;
-  routes: Route[];
-  types: WallTypes[];
+  gymId: string
+  id: string
+  name: string
+  routes: Route[]
+  types: WallTypes[]
 }
 
 export enum WallTypes {

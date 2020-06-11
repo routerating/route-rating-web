@@ -1,5 +1,5 @@
-import { sendRequest, createJsonRequest } from '../utils';
-import { User } from '@routerating/entities';
+import { sendRequest, createJsonRequest } from '../utils'
+import { User } from '@routerating/entities'
 
 export function login(email: string, password: string): Promise<Response> {
   return sendRequest(
@@ -7,7 +7,7 @@ export function login(email: string, password: string): Promise<Response> {
       email,
       password,
     })
-  );
+  )
 }
 
 export function createBasicUser(user: User): Promise<Response> {
@@ -20,7 +20,7 @@ export function createBasicUser(user: User): Promise<Response> {
       undefined,
       user
     )
-  );
+  )
 }
 
 export function createAdminUser(user: User): Promise<Response> {
@@ -33,11 +33,11 @@ export function createAdminUser(user: User): Promise<Response> {
       undefined,
       user
     )
-  );
+  )
 }
 
 export function updateUser(user: User): Promise<Response> {
   return sendRequest(
     createJsonRequest('users', undefined, 'PUT', undefined, undefined, user)
-  );
+  )
 }
