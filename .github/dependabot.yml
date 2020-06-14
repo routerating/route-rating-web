@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: npm
-    directory: "/libraries/entities"
+    directory: "/packages/entities"
     open-pull-requests-limit: 5
     labels:
       - "npm"
@@ -19,7 +19,7 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: npm
-    directory: "/sdks/requests"
+    directory: "/packages/requests"
     open-pull-requests-limit: 5
     labels:
       - "npm"

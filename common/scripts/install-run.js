@@ -303,14 +303,14 @@ function _cleanInstallFolder(rushTempFolder, packageInstallFolder) {
 function _createPackageJson(packageInstallFolder, name, version) {
     try {
         const packageJsonContents = {
-            'name': 'ci-rush',
-            'version': '0.0.0',
-            'dependencies': {
+            name: 'ci-rush',
+            version: '0.0.0',
+            dependencies: {
                 [name]: version
             },
-            'description': 'DON\'T WARN',
-            'repository': 'DON\'T WARN',
-            'license': 'MIT'
+            description: "DON'T WARN",
+            repository: "DON'T WARN",
+            license: 'MIT'
         };
         const packageJsonPath = path.join(packageInstallFolder, PACKAGE_JSON_FILENAME);
         fs.writeFileSync(packageJsonPath, JSON.stringify(packageJsonContents, undefined, 2));
@@ -345,7 +345,7 @@ function _installPackage(packageInstallFolder, name, version) {
  */
 function _getBinPath(packageInstallFolder, binName) {
     const binFolderPath = path.resolve(packageInstallFolder, NODE_MODULES_FOLDER_NAME, '.bin');
-    const resolvedBinName = (os.platform() === 'win32') ? `${binName}.cmd` : binName;
+    const resolvedBinName = os.platform() === 'win32' ? `${binName}.cmd` : binName;
     return path.resolve(binFolderPath, resolvedBinName);
 }
 /**
@@ -404,7 +404,7 @@ function runWithErrorAndStatusCode(fn) {
 }
 exports.runWithErrorAndStatusCode = runWithErrorAndStatusCode;
 function _run() {
-    const [nodePath, /* Ex: /bin/node */ scriptPath, /* /repo/common/scripts/install-run-rush.js */ rawPackageSpecifier, /* qrcode@^1.2.0 */ packageBinName, /* qrcode */ ...packageBinArgs /* [-f, myproject/lib] */] = process.argv;
+    const [nodePath /* Ex: /bin/node */, scriptPath /* /repo/common/scripts/install-run-rush.js */, rawPackageSpecifier /* qrcode@^1.2.0 */, packageBinName /* qrcode */, ...packageBinArgs /* [-f, myproject/lib] */] = process.argv;
     if (!nodePath) {
         throw new Error('Unexpected exception: could not detect node path');
     }

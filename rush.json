@@ -1,25 +1,39 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
 
-  "rushVersion": "5.24.4",
-  "yarnVersion": "1.22.4",
+
+  "rushVersion": "5.25.2",
+  "npmVersion": "6.14.5",
   "nodeSupportedVersionRange": ">=12.0.0 <13.0.0",
+  "ensureConsistentVersions": true,
+  "projectFolderMinDepth": 2,
   "projectFolderMaxDepth": 2,
+  "telemetryEnabled": false,
+
+  "gitPolicy": {},
+
   "repository": {
-    "url": "https://github.com/routerating/route-rating-web",
-    "defaultBranch": "master",
-    "defaultRemote": "origin"
+    "url": "https://github.com/routerating/routerating-web.git"
   },
+
+  "eventHooks": {
+    "preRushInstall": [],
+    "postRushInstall": ["scripts/generate_vscode_workspace.sh"],
+    "preRushBuild": [],
+    "postRushBuild": []
+  },
+
+  "variants": [],
   "projects": [
     {
       "packageName": "@routerating/requests",
-      "projectFolder": "sdks/requests",
+      "projectFolder": "packages/requests",
       "shouldPublish": true,
       "reviewCategory": "sdks"
     },
     {
       "packageName": "@routerating/entities",
-      "projectFolder": "libraries/entities",
+      "projectFolder": "packages/entities",
       "shouldPublish": true,
       "reviewCategory": "libraries"
     },

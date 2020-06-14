@@ -2,11 +2,11 @@
   "folders": [
     {
       "name": "@routerating/requests",
-      "path": "sdks/requests"
+      "path": "packages/requests"
     },
     {
       "name": "@routerating/entities",
-      "path": "libraries/entities"
+      "path": "packages/entities"
     },
     {
       "name": "@routerating/web",

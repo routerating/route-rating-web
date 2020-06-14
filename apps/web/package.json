@@ -28,7 +28,8 @@
     "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
-    "test.watch": "stencil test --spec --e2e --watchAll"
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "clean": "find . -name *.log -delete && rm -rf dist coverage www loader"
   },
   "version": "0.0.1"
 }
