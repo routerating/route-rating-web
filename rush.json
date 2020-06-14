@@ -1,23 +1,15 @@
 {
   "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/rush.schema.json",
 
-  "rushVersion": "5.23.5",
+  "rushVersion": "5.24.4",
   "yarnVersion": "1.22.4",
-  "nodeSupportedVersionRange": ">=11.0.0 <13.0.0",
+  "nodeSupportedVersionRange": ">=12.0.0 <13.0.0",
   "projectFolderMaxDepth": 2,
   "repository": {
-    "url": "https://github.com/LukeShay/route-rating-web",
+    "url": "https://github.com/routerating/route-rating-web",
     "defaultBranch": "master",
     "defaultRemote": "origin"
   },
-
-  "eventHooks": {
-    "preRushInstall": [],
-    "postRushInstall": [],
-    "preRushBuild": [],
-    "postRushBuild": []
-  },
-
   "projects": [
     {
       "packageName": "@routerating/requests",

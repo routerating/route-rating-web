@@ -1,11 +1,11 @@
-import { createJsonRequest } from '../main';
+import { createJsonRequest } from '../main'
 
 describe('createJsonRequest', () => {
   it('should create a Request object with correct fields.', async () => {
-    const authorization = 'authorization';
-    const refresh = 'refresh';
-    const body = { key: 'value' };
-    const path = '/some/endpoint';
+    const authorization = 'authorization'
+    const refresh = 'refresh'
+    const body = { key: 'value' }
+    const path = '/some/endpoint'
 
     const returned = createJsonRequest(
       path,
@@ -14,8 +14,8 @@ describe('createJsonRequest', () => {
       authorization,
       refresh,
       body
-    );
+    )
 
-    expect(returned.path).toEqual(path);
-  });
-});
+    expect(returned.path).toEqual(path)
+  })
+})

@@ -1,0 +1,45 @@
+name: ci
+on: [push]
+
+jobs:
+  change:
+    runs-on: ubuntu-latest
+    if: github.event.label.name != 'stage-release'
+    name: Change
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.18'
+      - run: node common/scripts/install-run-rush.js change -v
+  check:
+    runs-on: ubuntu-latest
+    name: Check
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.18'
+      - run: node common/scripts/install-run-rush.js install
+      - run: node common/scripts/install-run-rush.js rebuild --verbose
+      - run: node common/scripts/install-run-rush.js check
+  lint:
+    runs-on: ubuntu-latest
+    name: Lint
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.18'
+      - run: node common/scripts/install-run-rush.js install
+      - run: node common/scripts/install-run-rush.js lint
+  test:
+    runs-on: ubuntu-latest
+    name: Test
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.18'
+      - run: node common/scripts/install-run-rush.js install
+      - run: node common/scripts/install-run-rush.js test:coverage --verbose

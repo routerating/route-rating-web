@@ -1,4 +1,4 @@
 export interface ErrorResponse {
-  error: string;
-  captcha: string;
+  error: string
+  captcha: string
 }

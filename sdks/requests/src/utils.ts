@@ -1,34 +1,34 @@
 export async function sendRequest(request: Request): Promise<Response> {
-  let url = `${process.env.API_URL}/${request.path}`;
+  let url = `${process.env.API_URL}/${request.path}`
 
-  if (request.queryParams) url += `?${request.queryParams}`;
+  if (request.queryParams) url += `?${request.queryParams}`
 
   const headers = {
     Authorization: request.authorization || '',
     'Content-type': request.contentType || '',
     Refresh: request.refresh || '',
-  };
+  }
 
-  const body = request.body;
+  const body = request.body
 
-  const method = request.method;
+  const method = request.method
 
   return fetch(url, {
     headers,
     body,
     method,
-  });
+  })
 }
 
 export interface Request {
-  authorization?: string;
+  authorization?: string
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  body?: any;
-  contentType?: string;
-  method: 'PUT' | 'POST' | 'GET';
-  path: string;
-  queryParams?: string;
-  refresh?: string;
+  body?: any
+  contentType?: string
+  method: 'PUT' | 'POST' | 'GET'
+  path: string
+  queryParams?: string
+  refresh?: string
 }
 
 export function createJsonRequest(
@@ -48,5 +48,5 @@ export function createJsonRequest(
     refresh,
     body: JSON.stringify(body),
     contentType: 'application/json',
-  };
+  }
 }
