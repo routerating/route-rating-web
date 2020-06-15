@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh -e
 
 PWD=$(pwd)
 
@@ -13,29 +13,27 @@ DATE=$(date +'%m-%d-%y %H:%M')
 COMMIT="Release ${DATE}"
 PR_DESC="Published release on ${DATE}"
 
-node common/scripts/install-run-rush.js install \
-&& \
-node common/scripts/install-run-rush.js rebuild --verbose \
-&& \
-node common/scripts/install-run-rush.js publish --apply --publish || exit 1
+node common/scripts/install-run-rush.js install
+node common/scripts/install-run-rush.js rebuild --verbose
+node common/scripts/install-run-rush.js publish --apply --publish
 
-for D in `find packages -type d -maxdepth 1 -mindepth 1`
-do
-  cd "${D}"
-  V=$(npm view . version)
-  git tag "@routerating/${D:6}_v${V}"
-  cd ../..
-done
+# for D in `find packages -type d -maxdepth 1 -mindepth 1`
+# do
+#   cd "${D}"
+#   V=$(npm view . version)
+#   git tag "@routerating/${D:6}_v${V}"
+#   cd ../..
+# done
 
-for D in `find apps -type d -maxdepth 1 -mindepth 1`
-do
-  cd "${D}"
-  V=$(npm view . version)
-  git tag "@lukeshay/${D:6}_${V}"
-  cd ../..
-done
+# for D in `find apps -type d -maxdepth 1 -mindepth 1`
+# do
+#   cd "${D}"
+#   V=$(npm view . version)
+#   git tag "@lukeshay/${D:6}_${V}"
+#   cd ../..
+# done
 
-git push --tags
+# git push --tags
 
 node common/scripts/install-run-rush.js update --full --purge
 node common/scripts/install-run-rush.js change --bulk --bump-type none

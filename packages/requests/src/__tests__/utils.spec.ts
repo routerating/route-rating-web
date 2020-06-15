@@ -1,4 +1,4 @@
-import { createJsonRequest } from '../main'
+import { createJsonRequest } from '../utils'
 
 describe('createJsonRequest', () => {
   it('should create a Request object with correct fields.', async () => {
