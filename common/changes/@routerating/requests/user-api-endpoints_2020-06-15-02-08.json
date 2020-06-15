@@ -1,0 +1,11 @@
+{
+  "changes": [
+    {
+      "comment": "",
+      "type": "none",
+      "packageName": "@routerating/requests"
+    }
+  ],
+  "packageName": "@routerating/requests",
+  "email": "shay.luke17@gmail.com"
+}
