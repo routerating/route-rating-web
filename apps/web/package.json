@@ -25,7 +25,7 @@
     "build": "stencil build",
     "format": "yarn lint --fix",
     "generate": "stencil generate",
-    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
+    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",

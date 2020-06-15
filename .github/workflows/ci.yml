@@ -4,7 +4,6 @@ on: [push]
 jobs:
   change:
     runs-on: ubuntu-latest
-    if: github.event.label.name != 'stage-release'
     name: Change
     steps:
       - uses: actions/checkout@v2
