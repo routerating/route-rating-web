@@ -23,8 +23,8 @@
   "cjs": "dist/cjs/index.js",
   "types": "dist/cjs/index.d.ts",
   "exports": {
-    "require": "dist/cjs/index.js",
-    "import": "dist/es/index.js"
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/es/index.js"
   },
   "devDependencies": {
     "@lukeshay/eslint-config-typescript": "^1.0.2",

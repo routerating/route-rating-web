@@ -25,8 +25,8 @@
   "cjs": "dist/cjs/index.js",
   "esm": "dist/es/index.js",
   "exports": {
-    "require": "dist/cjs/index.js",
-    "import": "dist/es/index.js"
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/es/index.js"
   },
   "dependencies": {
     "@routerating/entities": "^0.0.2"
