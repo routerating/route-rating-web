@@ -19,5 +19,6 @@
     "packages/*",
     "apps/*"
   ],
-  "version": "independent"
+  "version": "independent",
+  "useWorkspaces": true
 }

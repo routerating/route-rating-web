@@ -15,6 +15,10 @@
     "rollup": "^2.10.9",
     "typescript": "^3.9.2"
   },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "husky": {
     "hooks": {
       "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS"
@@ -35,12 +39,10 @@
           "docs",
           "feat",
           "fix",
-          "perf",
           "refactor",
           "revert",
           "style",
-          "test",
-          "ignore"
+          "test"
         ]
       ]
     }
