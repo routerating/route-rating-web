@@ -7,14 +7,14 @@
 set -e
 
 shadow_dir="./.shadowroot"
-rush_file="./rush.json"
+lerna_file="./lerna.json"
 extensions_file="./.vscode/extensions.json"
 settings_file="./.vscode/settings.json"
 workspace_file="./code.code-workspace"
 
 update_workspace_projects() {
   tmp_workspace_file="$workspace_file.tmp"
-  projects=`jq '.projects' $rush_file`
+  projects=`jq '.projects' $lerna_file`
 
   root_files="[{\"name\": \"Project Files\", \"path\": \""$shadow_dir"\"}]"
   scripts="[{\"name\": \"Project Scripts\", \"path\": \"scripts\"}]"
@@ -26,7 +26,7 @@ update_workspace_projects() {
     --argjson github "$github" --argjson vscode "$vscode" \
     --argjson rootfiles "$root_files" --argjson docs "$documentation" \
     '.projects | map({ "name": .packageName, "path": .projectFolder }) | . + $scripts + $common + $github + $vscode + $rootfiles + $docs | sort_by(.name)' \
-    $rush_file`
+    $lerna_file`
 
   extensions=`cat $extensions_file`
   settings=`cat $settings_file`

@@ -4,11 +4,15 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
+    "@lukeshay/typescript-config": "^1.0.1",
+    "@lukeshay/rollup-config": "^0.0.4",
+    "@types/jest": "^26.0.0",
     "cross-env": "^7.0.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jest-junit": "^10.0.0",
     "lerna": "^3.22.1",
+    "rollup": "^2.10.9",
     "typescript": "^3.9.2"
   },
   "husky": {
@@ -19,7 +23,27 @@
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
-    ]
+    ],
+    "rules": {
+      "type-enum": [
+        2,
+        "always",
+        [
+          "build",
+          "chore",
+          "ci",
+          "docs",
+          "feat",
+          "fix",
+          "perf",
+          "refactor",
+          "revert",
+          "style",
+          "test",
+          "ignore"
+        ]
+      ]
+    }
   },
   "scripts": {
     "release": "cross-env HUSKY_BYPASS=true lerna publish",

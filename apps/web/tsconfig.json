@@ -22,5 +22,13 @@
   ],
   "exclude": [
     "node_modules"
+  ],
+  "references": [
+    {
+      "path": "../../packages/entities/tsconfig.json"
+    },
+    {
+      "path": "../../packages/requests/tsconfig.json"
+    }
   ]
 }

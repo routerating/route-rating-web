@@ -1,14 +1,8 @@
 {
-  "extends": "@lukeshay/typescript-config/tsconfig",
-  "include": ["./src/**/*.js", "./src/**/*.ts"],
-  "exclude": [
-    "./node_modules/**/*",
-    "./src/**/__tests__/**/*",
-    "./src/**/*.spec.*",
-    "./src/**/*.test.*"
-  ],
+  "extends": "../../tsconfig.build.json",
   "compilerOptions": {
-    "outDir": "dist",
-    "declaration": true
-  }
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"]
 }
