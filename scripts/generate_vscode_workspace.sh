@@ -12,17 +12,32 @@ extensions_file="./.vscode/extensions.json"
 settings_file="./.vscode/settings.json"
 workspace_file="./code.code-workspace"
 
+get_projects() {
+  directories=`jq -r '.packages | .[]' $lerna_file`
+
+  folders="["
+
+  for d in $directories; do
+    p=`echo $d | sed s%.*/%%g`
+    d=`echo $d | sed s%/.*%%g`
+    folders+="{\"name\": \"@sourceallies/$p\", \"path\": \"./$d/$p\"},"
+  done
+
+  folders=${folders%?}
+  folders+="]"
+
+  echo $folders
+}
+
 update_workspace_projects() {
   tmp_workspace_file="$workspace_file.tmp"
-  projects=`jq '.projects' $lerna_file`
 
   root_files="[{\"name\": \"Project Files\", \"path\": \""$shadow_dir"\"}]"
   scripts="[{\"name\": \"Project Scripts\", \"path\": \"scripts\"}]"
-  common="[{\"name\": \"Rush\", \"path\": \"common\"}]"
   github="[{\"name\": \"Github Settings\", \"path\": \".github\"}]"
   vscode="[{\"name\": \"VS Code Settings\", \"path\": \".vscode\"}]"
   documentation="[{\"name\": \"Documentation\", \"path\": \"docs\"}]"
-  folders=`jq --argjson scripts "$scripts" --argjson common "$common" \
+  folders=`jq --argjson scripts "$scripts" \
     --argjson github "$github" --argjson vscode "$vscode" \
     --argjson rootfiles "$root_files" --argjson docs "$documentation" \
     '.projects | map({ "name": .packageName, "path": .projectFolder }) | . + $scripts + $common + $github + $vscode + $rootfiles + $docs | sort_by(.name)' \
@@ -67,4 +82,4 @@ main() {
   update_workspace_projects
 }
 
-update_shadow_root
+get_projects
