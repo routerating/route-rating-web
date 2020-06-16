@@ -7,6 +7,7 @@
     "build": "lerna run build",
     "clean": "lerna run clean",
     "lint": "lerna run lint",
+    "format": "lerna run format",
     "postinstall": "lerna bootstrap && ./scripts/generate_vscode_workspace.sh"
   },
   "devDependencies": {
