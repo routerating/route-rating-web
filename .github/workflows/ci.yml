@@ -1,27 +1,18 @@
-name: ci
+name: CI
 on: [push]
 
 jobs:
-  change:
+  build:
     runs-on: ubuntu-latest
-    name: Change
+    name: Build
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
           node-version: '12.18'
-      - run: node common/scripts/install-run-rush.js change -v
-  check:
-    runs-on: ubuntu-latest
-    name: Check
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12.18'
-      - run: node common/scripts/install-run-rush.js install
-      - run: node common/scripts/install-run-rush.js rebuild --verbose
-      - run: node common/scripts/install-run-rush.js check
+      - run: npm i -g yarn
+      - run: yarn
+      - run: yarn build
   lint:
     runs-on: ubuntu-latest
     name: Lint
@@ -30,8 +21,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.18'
-      - run: node common/scripts/install-run-rush.js install
-      - run: node common/scripts/install-run-rush.js lint
+      - run: npm i -g yarn
+      - run: yarn
+      - run: yarn lint
   test:
     runs-on: ubuntu-latest
     name: Test
@@ -40,8 +32,9 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: '12.18'
-      - run: node common/scripts/install-run-rush.js install
-      - run: node common/scripts/install-run-rush.js test:coverage --verbose
+      - run: npm i -g yarn
+      - run: yarn
+      - run: yarn test
   tag:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
