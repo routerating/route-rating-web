@@ -24,5 +24,29 @@ export const config: Config = {
       injectGlobalPaths: [
         'src/global/variables.scss'
       ]
-    })]
+  })],
+  testing: {
+    testPathIgnorePatterns: ["src/__tests__"],
+    collectCoverageFrom: [
+      'src/**/*.ts',
+      'src/**/*.tsx',
+      '!**/*.d.ts',
+      '!**/types.ts',
+      '!**/*.spec.*',
+      '!**/*.e2e.*',
+      '!dist/**/*',
+      '!src/index.ts',
+      '!**/__tests__/**/*',
+    ],
+    coverageThreshold: {
+      global: {
+        branches: 100,
+        functions: 100,
+        lines: 100,
+        statements: 100
+      }
+    },
+    coverageReporters: ['lcov'],
+    reporters: ['default'],
+  }
 };

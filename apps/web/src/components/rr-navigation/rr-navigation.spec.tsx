@@ -1,5 +1,5 @@
-import { newSpecPage } from '@stencil/core/testing'
 import { RrNavigation } from './rr-navigation'
+import { newSpecPage } from '@stencil/core/testing'
 
 describe('rr-navigation', () => {
   it('renders', async () => {
