@@ -46,15 +46,17 @@
     eslint-plugin-prettier "^3.1.2"
     prettier "^2.0.5"
 
-"@lukeshay/rollup-config@~0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@lukeshay/rollup-config/-/rollup-config-0.0.3.tgz#d4ed8cfa47f20cae4c405220942501cd86e141e0"
-  integrity sha512-fCNiE069ASLA6EY5HGUNQz/qB26rUWKelkzIWCeUJpFf8UHHC7sq3h4Fpes/LocsORQ/5ymHZGWoEEzTyiJOWw==
+"@lukeshay/rollup-config@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@lukeshay/rollup-config/-/rollup-config-0.0.4.tgz#f5ce3437c3d1e53d48774699e3665f54953f3e30"
+  integrity sha512-yT8n7Y+YRspfgTEgf7ucoVSuJlJHawlUHX9juIlOxDzuP6eQrYZPNN0RdpQsP0g/HbAdz6LJWbxdAmH/tvGVRQ==
   dependencies:
     "@rollup/plugin-auto-install" "*"
     "@rollup/plugin-commonjs" "*"
+    "@rollup/plugin-json" "*"
     "@rollup/plugin-node-resolve" "*"
     "@rollup/plugin-strip" "*"
+    rollup "*"
     rollup-plugin-terser "*"
     rollup-plugin-typescript2 "*"
 
@@ -63,12 +65,12 @@
   resolved "https://registry.yarnpkg.com/@lukeshay/typescript-config/-/typescript-config-1.0.1.tgz#99c7f7eac61b79033071f1a921644b875a0cfbcb"
   integrity sha512-usfGHOAR77o2jQ4mMDXpWuPLNspsggRXRD5FMJCWk9Rb/XggDUqSDHl1RaBkgwBQocPrfuex4s4M+LJY//E2qg==
 
-"@rollup/plugin-auto-install@*", "@rollup/plugin-auto-install@^2.1.0":
+"@rollup/plugin-auto-install@*":
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-auto-install/-/plugin-auto-install-2.1.0.tgz#4e5503fe9bfb3e2c0c3544880e2d7edead492ce8"
   integrity sha512-c0oR8fkzzVVql27oLyqgzcidYpxqqkPcNd126LJneXepTw/6/1TEgCrn83BOFwrg/n4OcFAtHVtUMM0qkkj/ow==
 
-"@rollup/plugin-commonjs@*", "@rollup/plugin-commonjs@^13.0.0":
+"@rollup/plugin-commonjs@*":
   version "13.0.0"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-commonjs/-/plugin-commonjs-13.0.0.tgz#8a1d684ba6848afe8b9e3d85649d4b2f6f7217ec"
   integrity sha512-Anxc3qgkAi7peAyesTqGYidG5GRim9jtg8xhmykNaZkImtvjA7Wsqep08D2mYsqw1IF7rA3lYfciLgzUSgRoqw==
@@ -81,7 +83,14 @@
     magic-string "^0.25.2"
     resolve "^1.11.0"
 
-"@rollup/plugin-node-resolve@*", "@rollup/plugin-node-resolve@^8.0.1":
+"@rollup/plugin-json@*":
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-json/-/plugin-json-4.1.0.tgz#54e09867ae6963c593844d8bd7a9c718294496f3"
+  integrity sha512-yfLbTdNS6amI/2OpmbiBoW12vngr5NW2jCJVZSBEz+H5KfUJZ2M7sDjk0U6GOOdCWFVScShte29o9NezJ53TPw==
+  dependencies:
+    "@rollup/pluginutils" "^3.0.8"
+
+"@rollup/plugin-node-resolve@*":
   version "8.0.1"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-node-resolve/-/plugin-node-resolve-8.0.1.tgz#364b5938808ee6b5164dea5ef7291be3f7395199"
   integrity sha512-KIeAmueDDaYMqMBnUngLVVZhURwxA12nq/YB6nGm5/JpVyOMwI1fCVU3oL/dAnnLBG7oiPXntO5LHOiMrfNXCA==
@@ -94,7 +103,7 @@
     is-module "^1.0.0"
     resolve "^1.14.2"
 
-"@rollup/plugin-strip@*", "@rollup/plugin-strip@^1.3.3":
+"@rollup/plugin-strip@*":
   version "1.3.3"
   resolved "https://registry.yarnpkg.com/@rollup/plugin-strip/-/plugin-strip-1.3.3.tgz#cf4380020414217affd467da14ebb65a303a7848"
   integrity sha512-jBZYNi9Wa5lSv8wXUepgqLFcv5PMJiP2VcWSIqjAzYOwZiQA09e3vwtar9EYHSYfIONyc1hG0IkSDz2VvGBZcA==
@@ -1060,7 +1069,7 @@ rimraf@2.6.3:
   dependencies:
     glob "^7.1.3"
 
-rollup-plugin-terser@*, rollup-plugin-terser@^6.1.0:
+rollup-plugin-terser@*:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-terser/-/rollup-plugin-terser-6.1.0.tgz#071866585aea104bfbb9dd1019ac523e63c81e45"
   integrity sha512-4fB3M9nuoWxrwm39habpd4hvrbrde2W2GG4zEGPQg1YITNkM3Tqur5jSuXlWNzbv/2aMLJ+dZJaySc3GCD8oDw==
@@ -1070,7 +1079,7 @@ rollup-plugin-terser@*, rollup-plugin-terser@^6.1.0:
     serialize-javascript "^3.0.0"
     terser "^4.7.0"
 
-rollup-plugin-typescript2@*, rollup-plugin-typescript2@^0.27.1:
+rollup-plugin-typescript2@*:
   version "0.27.1"
   resolved "https://registry.yarnpkg.com/rollup-plugin-typescript2/-/rollup-plugin-typescript2-0.27.1.tgz#4f27193408a8f040139eed3e3db7b0c7f3668200"
   integrity sha512-RJl77Bbj1EunAQDC3dK/O2HWuSUX3oJbRGzyLoS5o9W4Hs1Nix3Gavqj1Lzs5Y6Ff4H2xXfmZ1WWUQCYocSbzQ==
@@ -1081,7 +1090,7 @@ rollup-plugin-typescript2@*, rollup-plugin-typescript2@^0.27.1:
     resolve "1.15.1"
     tslib "1.11.2"
 
-rollup@^2.10.9:
+rollup@*, rollup@^2.10.9:
   version "2.16.1"
   resolved "https://registry.yarnpkg.com/rollup/-/rollup-2.16.1.tgz#97805e88071e2c6727bd0b64904976d14495c873"
   integrity sha512-UYupMcbFtoWLB6ZtL4hPZNUTlkXjJfGT33Mmhz3hYLNmRj/cOvX2B26ZxDQuEpwtLdcyyyraBGQ7EfzmMJnXXg==
