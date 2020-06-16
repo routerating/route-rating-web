@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export async function sendRequest(request: Request): Promise<Response> {
   let url = `${process.env.API_URL}/${request.path}`
 

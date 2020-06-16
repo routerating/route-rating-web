@@ -1,9 +1,8 @@
 module.exports = {
-  extends: ['@lukeshay/eslint-config-typescript'],
-  plugins: ['@typescript-eslint', 'prettier', 'jest'],
+  extends: ['../../.eslintrc'],
+  plugins: ['jest'],
   env: {
     browser: true,
     jest: true,
-    node: true,
   },
 }

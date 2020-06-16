@@ -1,26 +1,11 @@
 {
-  "author": "Luke Shay <https://github.com/LukeShay>",
-  "description": "Stencil App Starter",
-  "devDependencies": {
-    "@stencil/core": "^1.12.2",
-    "@stencil/eslint-plugin": "^0.3.1",
-    "@stencil/router": "^1.0.1",
-    "@stencil/sass": "^1.3.1",
-    "@stencil/store": "^1.3.0",
-    "@types/jest": "^26.0.0",
-    "@typescript-eslint/eslint-plugin": "^3.2.0",
-    "@typescript-eslint/parser": "^3.2.0",
-    "eslint": "^7.2.0",
-    "eslint-config-prettier": "^6.11.0",
-    "eslint-plugin-prettier": "^3.1.3",
-    "eslint-plugin-react": "^7.20.0",
-    "prettier": "^2.0.5",
-    "workbox-build": "4.3.1"
-  },
-  "license": "MIT",
   "name": "@routerating/web",
-  "private": true,
+  "description": "Stencil App Starter",
+  "version": "0.0.1",
+  "license": "MIT",
+  "author": "Luke Shay <https://github.com/LukeShay>",
   "repository": "https://github.com/LukeShay/route-rating-web.git",
+  "private": true,
   "scripts": {
     "build": "stencil build --prerender --log --stats",
     "format": "yarn lint --fix",
@@ -31,8 +16,16 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "clean": "find . -name *.log -delete && rm -rf dist coverage www loader"
   },
-  "version": "0.0.1",
-  "dependencies": {
-    "eslint": "^7.2.0"
+  "devDependencies": {
+    "@lukeshay/eslint-config-typescript": "^1.0.3",
+    "@stencil/core": "^1.12.2",
+    "@stencil/eslint-plugin": "^0.3.1",
+    "@stencil/router": "^1.0.1",
+    "@stencil/sass": "^1.3.1",
+    "@stencil/store": "^1.3.0",
+    "@types/jest": "^26.0.0",
+    "eslint": "^7.2.0",
+    "eslint-plugin-react": "^7.20.0",
+    "workbox-build": "4.3.1"
   }
 }
