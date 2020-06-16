@@ -1,0 +1,74 @@
+/**
+ * This configuration file defines custom commands for the "rush" command-line.
+ * For full documentation, please see https://rushjs.io
+ */
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/rush/v5/command-line.schema.json",
+
+  /**
+   * Custom "commands" introduce new verbs for the command-line.  To see the help for these
+   * example commands, try "rush --help", "rush my-bulk-command --help", or
+   * "rush my-global-command --help".
+   */
+  "commands": [
+    {
+      "name": "format",
+      "commandKind": "bulk",
+      "summary": "Runs the formatter for all projects.",
+      "description": "Invokes the `format` NPM script for each project.",
+      "enableParallelism": true,
+      "safeForSimultaneousRushProcesses": true,
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": false
+    },
+    {
+      "name": "lint",
+      "commandKind": "bulk",
+      "summary": "Runs the linter for all projects and reports errors.",
+      "description": "Invokes the `list` NPM script for each project.",
+      "enableParallelism": true,
+      "safeForSimultaneousRushProcesses": true,
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": false
+    },
+    {
+      "name": "clean",
+      "commandKind": "bulk",
+      "summary": "Cleans all the projects projects.",
+      "description": "Invokes the `clean` NPM script for each project.",
+      "enableParallelism": true,
+      "safeForSimultaneousRushProcesses": true,
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "test",
+      "commandKind": "bulk",
+      "summary": "Runs the tests for all projects and reports errors.",
+      "description": "Invokes the `test` NPM script for each project.",
+      "enableParallelism": true,
+      "safeForSimultaneousRushProcesses": true,
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": false
+    },
+    {
+      "name": "test:coverage",
+      "commandKind": "bulk",
+      "summary": "Gets coverage for all projects and reports errors.",
+      "description": "Invokes the `test:coverage` NPM script for each project.",
+      "enableParallelism": true,
+      "safeForSimultaneousRushProcesses": true,
+      "ignoreMissingScript": true,
+      "allowWarningsInSuccessfulBuild": true
+    },
+    {
+      "name": "generate-workspace",
+      "commandKind": "global",
+      "summary": "Generates your VSCode workspace",
+      "description": "Runs scripts/generate_vscode_workspace.sh to generate a workspace for you.",
+      "shellCommand": "./scripts/generate_vscode_workspace.sh"
+    }
+  ],
+
+  "parameters": []
+}

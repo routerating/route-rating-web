@@ -1,4 +1,5 @@
-import { sendRequest, createJsonRequest } from '../utils'
+import { createJsonRequest, sendRequest } from '../utils'
+
 import { User } from '@routerating/entities'
 
 export function login(email: string, password: string): Promise<Response> {
@@ -23,14 +24,18 @@ export function createBasicUser(user: User): Promise<Response> {
   )
 }
 
-export function createAdminUser(user: User): Promise<Response> {
+export function createAdminUser(
+  user: User,
+  authorization?: string,
+  refresh?: string
+): Promise<Response> {
   return sendRequest(
     createJsonRequest(
       'users/create/admin',
       undefined,
       'POST',
-      undefined,
-      undefined,
+      authorization,
+      refresh,
       user
     )
   )
