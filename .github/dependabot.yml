@@ -1,7 +1,7 @@
 version: 2
 updates:
   - package-ecosystem: npm
-    directory: "/apps/web"
+    directory: "apps/web"
     open-pull-requests-limit: 5
     labels:
       - "npm"
@@ -10,7 +10,7 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: npm
-    directory: "/packages/entities"
+    directory: "packages/entities"
     open-pull-requests-limit: 5
     labels:
       - "npm"
@@ -19,7 +19,7 @@ updates:
     schedule:
       interval: daily
   - package-ecosystem: npm
-    directory: "/packages/requests"
+    directory: "packages/requests"
     open-pull-requests-limit: 5
     labels:
       - "npm"

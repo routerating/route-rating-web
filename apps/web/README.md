@@ -1,4 +1,6 @@
-# Stencil App Starter
+# @routerating/app-web
+
+![CI](https://github.com/routerating/route-rating-web/workflows/CI/badge.svg)
 
 Stencil is a compiler for building fast web apps using Web Components.
 

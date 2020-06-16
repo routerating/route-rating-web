@@ -1,6 +1,7 @@
 {
   "name": "route-rating-web",
   "private": true,
+  "license": "MIT",
   "scripts": {
     "release": "cross-env HUSKY_BYPASS=true lerna publish",
     "test": "lerna run test",
