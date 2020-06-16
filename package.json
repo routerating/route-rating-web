@@ -9,7 +9,8 @@
     "clean": "lerna run clean",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "postinstall": "lerna bootstrap && ./scripts/generate_vscode_workspace.sh"
+    "postinstall": "lerna bootstrap",
+    "setup": "yarn && ./scripts/generate_vscode_workspace.sh"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
