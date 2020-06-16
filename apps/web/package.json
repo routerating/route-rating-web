@@ -30,5 +30,8 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "eslint": "^7.2.0"
+  }
 }

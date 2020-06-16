@@ -1,0 +1,33 @@
+{
+  "name": "route-rating-web",
+  "private": true,
+  "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "cross-env": "^7.0.2",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint": "^7.2.0",
+    "husky": "^4.2.5",
+    "lerna": "^3.22.1",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.2",
+    "jest": "^26.0.1",
+    "jest-junit": "^10.0.0",
+    "eslint-plugin-jest": "23.13.1"
+  },
+  "husky": {
+    "hooks": {
+    "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "commitlint": {
+      "extends": ["@commitlint/config-conventional"]
+  },
+  "scripts": {
+    "release": "cross-env HUSKY_BYPASS=true lerna publish",
+    "test": "lerna run test",
+    "build": "lerna run build",
+    "clean": "lerna run clean"
+  }
+}

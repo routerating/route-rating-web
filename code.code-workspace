@@ -2,11 +2,11 @@
   "folders": [
     {
       "name": "@routerating/requests",
-      "path": "sdks/requests"
+      "path": "packages/requests"
     },
     {
       "name": "@routerating/entities",
-      "path": "libraries/entities"
+      "path": "packages/entities"
     },
     {
       "name": "@routerating/web",
@@ -27,10 +27,6 @@
     {
       "name": "Project Scripts",
       "path": "scripts"
-    },
-    {
-      "name": "Rush",
-      "path": "common"
     },
     {
       "name": "VS Code Settings",
