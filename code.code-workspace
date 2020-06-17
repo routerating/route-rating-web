@@ -1,0 +1,38 @@
+{
+  "folders": [
+    {
+      "name": "Project Files",
+      "path": "./.shadowroot"
+    },
+    {
+      "name": "Project Scripts",
+      "path": "scripts"
+    },
+    {
+      "name": "Github Settings",
+      "path": ".github"
+    },
+    {
+      "name": "VS Code Settings",
+      "path": ".vscode"
+    },
+    {
+      "name": "Documentation",
+      "path": "docs"
+    },
+    {
+      "name": "@routerating/entities",
+      "path": "./packages/entities"
+    },
+    {
+      "name": "@routerating/requests",
+      "path": "./packages/requests"
+    },
+    {
+      "name": "@routerating/web",
+      "path": "./apps/web"
+    }
+  ],
+  "settings": [],
+  "extensions": []
+}

@@ -1,0 +1,38 @@
+{
+  "name": "@routerating/entities",
+  "version": "0.0.2",
+  "description": "Entities package for Route Rating.",
+  "repository": "https://github.com/LukeShay/route-rating-web.git",
+  "author": "Luke Shay <https://github.com/LukeShay>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "rollup -c",
+    "format": "yarn lint --fix",
+    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
+    "test": "exit 0",
+    "clean": "find . -name *.log -delete && rm -rf dist"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "input": "src/index.ts",
+  "main": "dist/cjs/index.js",
+  "esm": "dist/es/index.js",
+  "cjs": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/es/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "typescript",
+    "route-rating"
+  ]
+}

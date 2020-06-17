@@ -1,0 +1,16 @@
+{
+  "extends": "@lukeshay/typescript-config/tsconfig-web",
+  "compilerOptions": {
+    "sourceMap": true,
+    "removeComments": true,
+    "composite": true,
+    "declaration": true
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.spec.ts",
+    "**/*.e2e.ts",
+    "**/__tests__/**/*"
+  ]
+}

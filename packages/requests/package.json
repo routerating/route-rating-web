@@ -1,0 +1,43 @@
+{
+  "name": "@routerating/requests",
+  "version": "0.0.4",
+  "description": "Requests package for Route Rating.",
+  "repository": "https://github.com/LukeShay/route-rating-web.git",
+  "author": "Luke Shay <https://github.com/LukeShay>",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "build": "rollup -c",
+    "format": "yarn lint --fix",
+    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "watch": "rollup -cw",
+    "clean": "find . -name *.log -delete && rm -rf dist coverage junit.xml"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "input": "src/index.ts",
+  "main": "dist/cjs/index.js",
+  "esm": "dist/es/index.js",
+  "cjs": "dist/cjs/index.js",
+  "types": "dist/cjs/index.d.ts",
+  "exports": {
+    "require": "./dist/cjs/index.js",
+    "import": "./dist/es/index.js"
+  },
+  "dependencies": {
+    "@routerating/entities": "^0.0.2"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "typescript",
+    "route-rating"
+  ]
+}

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Route Rating General Support
+    url: https://github.com/routerating/route-rating
+    about: Repository to ask general questions related to Route Rating.
+  - name: Route Rating Backend Support
+    url: https://github.com/routerating/route-rating-serverless
+    about: Repository to ask backend questions related to Route Rating.
