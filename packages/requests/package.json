@@ -29,26 +29,7 @@
     "import": "./dist/es/index.js"
   },
   "dependencies": {
-    "@routerating/entities": "^0.0.2",
-    "eslint": "^7.2.0"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.9.6",
-    "@babel/preset-env": "^7.9.6",
-    "@babel/preset-typescript": "^7.9.0",
-    "@lukeshay/eslint-config-typescript": "^1.0.2",
-    "@types/jest": "^26.0.0",
-    "@types/node": "^14.0.4",
-    "babel-plugin-dynamic-import-node": "^2.3.3",
-    "eslint": "^7.2.0",
-    "eslint-plugin-jest": "23.13.1",
-    "jest": "^26.0.1",
-    "jest-junit": "^10.0.0",
-    "prettier": "^2.0.5",
-    "rollup": "^2.10.9",
-    "ts-jest": "^26.0.0",
-    "typescript": "^3.9.2",
-    "@lukeshay/rollup-config": "^0.0.4"
+    "@routerating/entities": "^0.0.2"
   },
   "files": [
     "dist",

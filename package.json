@@ -15,15 +15,18 @@
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
-    "@lukeshay/typescript-config": "^1.0.1",
+    "@lukeshay/eslint-config-typescript": "^1.0.3",
     "@lukeshay/rollup-config": "^0.0.4",
+    "@lukeshay/typescript-config": "^1.0.1",
     "@types/jest": "^26.0.0",
     "cross-env": "^7.0.2",
+    "eslint-plugin-jest": "^23.13.2",
     "husky": "^4.2.5",
     "jest": "^26.0.1",
     "jest-junit": "^10.0.0",
     "lerna": "^3.22.1",
-    "rollup": "^2.10.9",
+    "rollup": "^2.16.1",
+    "ts-jest": "^26.1.0",
     "typescript": "^3.9.2"
   },
   "workspaces": [
