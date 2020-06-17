@@ -1,6 +1,6 @@
 {
   "name": "@routerating/requests",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Requests package for Route Rating.",
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
@@ -29,7 +29,7 @@
     "import": "./dist/es/index.js"
   },
   "dependencies": {
-    "@routerating/entities": "^0.0.2"
+    "@routerating/entities": "^0.0.3"
   },
   "files": [
     "dist",
