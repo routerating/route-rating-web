@@ -3,6 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "prerelease": "yarn && yarn build",
     "release": "cross-env HUSKY_BYPASS=true lerna publish",
     "test": "lerna run test",
     "build": "lerna run build",
