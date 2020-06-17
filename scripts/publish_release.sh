@@ -11,6 +11,7 @@ COMMIT="Release ${DATE}"
 PR_DESC="Published release on ${DATE}"
 
 git checkout -b ${BRANCH_NAME}
+git push --set-upstream origin ${BRANCH_NAME}
 
 yarn release
 # git add .
