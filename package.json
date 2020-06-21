@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "bump": "HUSKY_BYPASS=true lerna run version",
+    "bump": "HUSKY_BYPASS=true lerna version",
     "test": "lerna run test",
     "build": "lerna run build",
     "clean": "lerna run clean",
