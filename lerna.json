@@ -9,9 +9,7 @@
         "**/test/**",
         "@(!(native-modules|built-ins|plugins|package)).json"
       ],
-      "yes": true,
-      "noGitTagVersion": true,
-      "noPush": true
+      "yes": true
     },
     "publish": {
       "branch": "refs/head/master"
