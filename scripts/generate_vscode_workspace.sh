@@ -8,6 +8,7 @@ shadow_dir="./.shadowroot"
 lerna_file="./lerna.json"
 extensions_file="./.vscode/extensions.json"
 settings_file="./.vscode/settings.json"
+launch_file="./.vscode/launch.json"
 workspace_file="./code.code-workspace"
 
 get_projects() {
@@ -40,13 +41,12 @@ update_workspace_projects() {
 
   folders=`echo "[${root_files},${scripts},${github},${vscode},${documentation},${configuration},${projects}]" | jq -s 'sort_by(.[] | .name) | .[0]'`
 
-  # extensions=`cat $extensions_file`
-  # settings=`cat $settings_file`
-  extensions="{}"
-  settings="{}"
+  extensions=`cat $extensions_file`
+  settings=`cat $settings_file`
+  launch=`cat $launch_file`
 
-  jq --argjson folders "$folders" --argjson extensions "$extensions" --argjson settings "$settings" \
-    '. | .folders = $folders | .settings = $settings | .extensions = $extensions' $workspace_file \
+  jq --argjson folders "$folders" --argjson extensions "$extensions" --argjson settings "$settings" --argjson launch "$launch" \
+    '. | .folders = $folders | .settings = $settings | .extensions = $extensions | .launch = $launch' $workspace_file \
     > $tmp_workspace_file && mv $tmp_workspace_file $workspace_file
 }
 

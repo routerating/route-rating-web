@@ -1,11 +1,11 @@
 import { newE2EPage } from '@stencil/core/testing'
 
-describe('rr-navigation', () => {
+describe('app-navigation', () => {
   it('renders', async () => {
     const page = await newE2EPage()
-    await page.setContent('<rr-navigation></rr-navigation>')
+    await page.setContent('<app-navigation></app-navigation>')
 
-    const element = await page.find('rr-navigation')
+    const element = await page.find('app-navigation')
     expect(element).toHaveClass('hydrated')
   })
 })

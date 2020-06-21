@@ -5,19 +5,14 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults } from "@stencil/router";
 export namespace Components {
     interface AppHome {
     }
+    interface AppNavigation {
+    }
     interface AppProfile {
-        /**
-          * Comment
-         */
-        "match": MatchResults;
     }
     interface AppRoot {
-    }
-    interface RrNavigation {
     }
 }
 declare global {
@@ -26,6 +21,12 @@ declare global {
     var HTMLAppHomeElement: {
         prototype: HTMLAppHomeElement;
         new (): HTMLAppHomeElement;
+    };
+    interface HTMLAppNavigationElement extends Components.AppNavigation, HTMLStencilElement {
+    }
+    var HTMLAppNavigationElement: {
+        prototype: HTMLAppNavigationElement;
+        new (): HTMLAppNavigationElement;
     };
     interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
     }
@@ -39,37 +40,27 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
-    interface HTMLRrNavigationElement extends Components.RrNavigation, HTMLStencilElement {
-    }
-    var HTMLRrNavigationElement: {
-        prototype: HTMLRrNavigationElement;
-        new (): HTMLRrNavigationElement;
-    };
     interface HTMLElementTagNameMap {
         "app-home": HTMLAppHomeElement;
+        "app-navigation": HTMLAppNavigationElement;
         "app-profile": HTMLAppProfileElement;
         "app-root": HTMLAppRootElement;
-        "rr-navigation": HTMLRrNavigationElement;
     }
 }
 declare namespace LocalJSX {
     interface AppHome {
     }
+    interface AppNavigation {
+    }
     interface AppProfile {
-        /**
-          * Comment
-         */
-        "match"?: MatchResults;
     }
     interface AppRoot {
     }
-    interface RrNavigation {
-    }
     interface IntrinsicElements {
         "app-home": AppHome;
+        "app-navigation": AppNavigation;
         "app-profile": AppProfile;
         "app-root": AppRoot;
-        "rr-navigation": RrNavigation;
     }
 }
 export { LocalJSX as JSX };
@@ -77,9 +68,9 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
+            "app-navigation": LocalJSX.AppNavigation & JSXBase.HTMLAttributes<HTMLAppNavigationElement>;
             "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
-            "rr-navigation": LocalJSX.RrNavigation & JSXBase.HTMLAttributes<HTMLRrNavigationElement>;
         }
     }
 }
