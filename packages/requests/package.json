@@ -1,11 +1,11 @@
 {
   "name": "@routerating/requests",
+  "private": true,
   "version": "0.0.5",
   "description": "Requests package for Route Rating.",
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
   "license": "MIT",
-  "private": false,
   "scripts": {
     "build": "rollup -c",
     "format": "yarn lint --fix",
@@ -14,10 +14,6 @@
     "test:cov": "jest --coverage",
     "watch": "rollup -cw",
     "clean": "find . -name *.log -delete && rm -rf dist coverage junit.xml"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
   },
   "input": "src/index.ts",
   "main": "dist/cjs/index.js",
