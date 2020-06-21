@@ -1,7 +1,7 @@
 {
   "name": "@routerating/web",
   "description": "Stencil App Starter",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "license": "MIT",
   "author": "Luke Shay <https://github.com/LukeShay>",
   "repository": "https://github.com/LukeShay/route-rating-web.git",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/LukeShay/route-rating-web/compare/@routerating/entities@0.0.3...@routerating/entities@0.0.4) (2020-06-21)
+
+
+### Bug Fixes
+
+* moved configs to a folder ([f3aa463](https://github.com/LukeShay/route-rating-web/commit/f3aa463eb5dd1d759a1f604c47ce713e2cffaa37))
+
+
+
+
+
 ## 0.0.3 (2020-06-17)
 
 

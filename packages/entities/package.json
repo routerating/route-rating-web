@@ -1,6 +1,6 @@
 {
   "name": "@routerating/entities",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Entities package for Route Rating.",
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
