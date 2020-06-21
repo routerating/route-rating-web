@@ -35,14 +35,15 @@ update_workspace_projects() {
   github="{\"name\": \"Github Settings\", \"path\": \".github\"}"
   vscode="{\"name\": \"VS Code Settings\", \"path\": \".vscode\"}"
   documentation="{\"name\": \"Documentation\", \"path\": \"docs\"}"
+  configuration="{\"name\": \"Configuration\", \"path\": \"configs\"}"
   projects=`get_projects`
 
-  folders=`echo "[${root_files},${scripts},${github},${vscode},${documentation},${projects}]" | jq -s 'sort_by(.[] | .name) | .[0]'`
+  folders=`echo "[${root_files},${scripts},${github},${vscode},${documentation},${configuration},${projects}]" | jq -s 'sort_by(.[] | .name) | .[0]'`
 
   # extensions=`cat $extensions_file`
   # settings=`cat $settings_file`
-  extensions="[]"
-  settings="[]"
+  extensions="{}"
+  settings="{}"
 
   jq --argjson folders "$folders" --argjson extensions "$extensions" --argjson settings "$settings" \
     '. | .folders = $folders | .settings = $settings | .extensions = $extensions' $workspace_file \

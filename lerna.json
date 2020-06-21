@@ -1,17 +1,18 @@
 {
   "command": {
-    "publish": {
+    "version": {
       "conventionalCommits": true,
       "ignoreChanges": [
         "*.md",
         "*.txt",
         "test/**",
         "**/test/**",
-        "codemods/**",
-        "# We ignore every JSON file, except for native-modules, built-ins and plugins defined in babel-preset-env/data.",
         "@(!(native-modules|built-ins|plugins|package)).json"
       ],
       "yes": true
+    },
+    "publish": {
+      "branch": "refs/head/master"
     }
   },
   "npmClient": "yarn",

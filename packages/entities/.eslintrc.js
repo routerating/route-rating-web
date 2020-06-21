@@ -1,3 +1,3 @@
 module.exports = {
-  extends: ['../../.eslintrc'],
+  extends: ['../../configs/.eslintrc'],
 }

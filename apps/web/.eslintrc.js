@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['plugin:@stencil/recommended', '../../.eslintrc'],
+  extends: ['plugin:@stencil/recommended', '../../configs/.eslintrc'],
   parserOptions: {
     project: './tsconfig.json',
   },

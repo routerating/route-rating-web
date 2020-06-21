@@ -3,12 +3,12 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "bump": "HUSKY_BYPASS=true lerna run version",
     "test": "lerna run test",
     "build": "lerna run build",
     "clean": "lerna run clean",
     "lint": "lerna run lint",
     "format": "lerna run format",
-    "postinstall": "lerna bootstrap",
     "setup": "yarn && ./scripts/generate_vscode_workspace.sh"
   },
   "devDependencies": {

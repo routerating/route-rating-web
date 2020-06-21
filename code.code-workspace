@@ -21,6 +21,10 @@
       "path": "docs"
     },
     {
+      "name": "Configuration",
+      "path": "configs"
+    },
+    {
       "name": "@routerating/entities",
       "path": "./packages/entities"
     },
@@ -33,6 +37,6 @@
       "path": "./apps/web"
     }
   ],
-  "settings": [],
-  "extensions": []
+  "settings": {},
+  "extensions": {}
 }

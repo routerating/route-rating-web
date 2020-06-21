@@ -26,7 +26,7 @@ export const config: Config = {
       ]
   })],
   testing: {
-    ...require('../../jest.config'),
+    ...require('../../configs/jest.config'),
     testPathIgnorePatterns: ["src/__tests__"],
     transform: undefined
   }

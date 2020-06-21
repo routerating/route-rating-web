@@ -15,7 +15,7 @@ git push --set-upstream origin ${BRANCH_NAME}
 
 yarn
 yarn build
-HUSKY_BYPASS=true lerna publish
+HUSKY_BYPASS=true lerna publish from-package
 
 gh pr create -t ${COMMIT} -b ${PR_DESC} -w
 

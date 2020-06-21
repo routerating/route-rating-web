@@ -1,5 +1,5 @@
 module.exports = {
-  extends: ['../../.eslintrc'],
+  extends: ['../../configs/.eslintrc'],
   env: {
     browser: true,
   },
