@@ -26,19 +26,18 @@
     },
     {
       "name": "@routerating/entities",
-      "path": "./packages/entities"
+      "path": "packages/entities"
     },
     {
       "name": "@routerating/requests",
-      "path": "./packages/requests"
+      "path": "packages/requests"
     },
     {
       "name": "@routerating/web",
-      "path": "./apps/web"
+      "path": "apps/web"
     }
   ],
   "settings": {},
-  "extensions": {},
   "launch": {
     "configurations": [
       {
@@ -104,5 +103,9 @@
         "disableOptimisticBPs": true
       }
     ]
+  },
+  "extensions": {
+    "recommendations": [],
+    "unwantedRecommendations": []
   }
 }

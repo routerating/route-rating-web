@@ -7,6 +7,7 @@
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "private": true,
   "scripts": {
+    "prebuild": "yarn clean",
     "build": "stencil build --prerender --log --stats",
     "format": "yarn lint --fix",
     "generate": "stencil generate",

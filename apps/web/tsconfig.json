@@ -5,12 +5,12 @@
     "declaration": false,
     "experimentalDecorators": true,
     "lib": [
-      "dom",
-      "es2015"
+      "DOM",
+      "ES2015"
     ],
     "moduleResolution": "node",
-    "module": "esnext",
-    "target": "es2017",
+    "module": "ESNext",
+    "target": "ES2017",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "jsx": "react",
@@ -20,8 +20,7 @@
     "src"
   ],
   "exclude": [
-    "node_modules",
-    "**/__tests__"
+    "node_modules"
   ],
   "references": [
     {

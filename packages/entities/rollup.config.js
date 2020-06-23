@@ -1,4 +1,7 @@
-import pkg from './package.json'
-import { typescriptConfig } from '@lukeshay/rollup-config'
+import { createRollupConfig, typescript } from '@lukeshay/rollup-config'
 
-export default typescriptConfig(pkg)
+import pkg from './package.json'
+
+export default createRollupConfig(pkg, [
+  typescript({ tsconfig: './tsconfig.build.json' }),
+])

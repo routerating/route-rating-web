@@ -7,7 +7,10 @@
   "author": "Luke Shay <https://github.com/LukeShay>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c",
+    "prebuild": "yarn clean",
+    "build": "yarn build:js && yarn build:types",
+    "build:js": "rollup -c",
+    "build:types": "tsc -p tsconfig.json --emitDeclarationOnly --outDir dist/types",
     "format": "yarn lint --fix",
     "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
     "test": "jest",
@@ -19,13 +22,14 @@
   "main": "dist/cjs/index.js",
   "esm": "dist/es/index.js",
   "cjs": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "exports": {
     "require": "./dist/cjs/index.js",
     "import": "./dist/es/index.js"
   },
   "dependencies": {
-    "@routerating/entities": "^0.0.3"
+    "@routerating/entities": "^0.0.3",
+    "tslib": "^2.0.0"
   },
   "files": [
     "dist",

@@ -28,5 +28,6 @@ export const config: Config = {
     ...require('../../configs/jest.config'),
     testPathIgnorePatterns: ["src/__tests__"],
     transform: undefined
-  }
+  },
+  tsconfig: './tsconfig.build.json'
 };
