@@ -15,12 +15,13 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
-    "@commitlint/config-conventional": "^9.0.1",
+    "@commitlint/config-lerna-scopes": "^9.0.1",
     "@lukeshay/eslint-config-typescript": "^1.0.4",
     "@lukeshay/rollup-config": "^0.2.0",
-    "@lukeshay/typescript-config": "^1.0.2",
     "@types/jest": "^26.0.3",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
     "cross-env": "^7.0.2",
+    "eslint": "^7.3.1",
     "eslint-plugin-jest": "^23.17.1",
     "husky": "^4.2.5",
     "jest": "^26.1.0",
@@ -28,7 +29,6 @@
     "lerna": "^3.22.1",
     "npm-check-updates": "^7.0.1",
     "rollup": "^2.18.0",
-    "ts-jest": "^26.1.1",
     "typescript": "^3.9.5"
   },
   "workspaces": [
@@ -42,7 +42,7 @@
   },
   "commitlint": {
     "extends": [
-      "@commitlint/config-conventional"
+      "@commitlint/config-lerna-scopes"
     ],
     "rules": {
       "type-enum": [

@@ -1,8 +1,8 @@
 {
-  "name": "@routerating/entities",
+  "name": "@routerating/interfaces",
   "private": true,
   "version": "0.0.3",
-  "description": "Entities package for Route Rating.",
+  "description": "Interfaces package for Route Rating.",
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
   "license": "MIT",
