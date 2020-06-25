@@ -6,10 +6,7 @@ module.exports = {
   rules: {
     '@stencil/strict-boolean-conditions': 0,
     '@typescript-eslint/no-explicit-any': 1,
-    '@typescript-eslint/explicit-function-return-type': 0,
-    "no-unused-vars": 0,
-    '@typescript-eslint/no-unused-vars': 0,
-    '@typescript-eslint/no-unused-vars-experimental': 2
+    '@typescript-eslint/explicit-function-return-type': 0
   },
-  ignorePatterns: '*.config.ts'
+  ignorePatterns: ['*.config.ts', '.eslintrc.js'],
 }

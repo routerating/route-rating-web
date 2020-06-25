@@ -1,10 +1,12 @@
 {
-  "extends": "./configs/tsconfig.build.json",
-
+  "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
     "baseUrl": "./packages",
     "paths": {
-      "@routerating/*": ["*/src"]
+      "@routerating/*": [
+        "*/src"
+      ]
     }
-  }
+  },
+  "extends": "./configs/tsconfig.json"
 }

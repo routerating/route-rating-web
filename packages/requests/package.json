@@ -8,25 +8,19 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "yarn build:js && yarn build:types",
-    "build:js": "rollup -c",
-    "build:types": "tsc -p tsconfig.json --emitDeclarationOnly --outDir dist/types",
+    "build": "rollup -c",
     "format": "yarn lint --fix",
-    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
+    "lint": "eslint . --ignore-path ../../.gitignore",
     "test": "jest",
     "test:cov": "jest --coverage",
     "watch": "rollup -cw",
-    "clean": "find . -name *.log -delete && rm -rf dist coverage junit.xml"
+    "clean": "rm -rf dist coverage junit.xml *.log",
+    "prepublishOnly": "yarn build"
   },
   "input": "src/index.ts",
   "main": "dist/cjs/index.js",
-  "esm": "dist/es/index.js",
-  "cjs": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
-  "exports": {
-    "require": "./dist/cjs/index.js",
-    "import": "./dist/es/index.js"
-  },
   "dependencies": {
     "@routerating/entities": "^0.0.3",
     "tslib": "^2.0.0"

@@ -8,24 +8,16 @@
   "license": "MIT",
   "scripts": {
     "prebuild": "yarn clean",
-    "build": "yarn build:js && yarn build:types",
-    "build:js": "rollup -c",
-    "build:types": "tsc -p tsconfig.json --emitDeclarationOnly --outDir dist/types",
-    "postbuild": "rm dist/tsconfig.tsbuildinfo",
+    "build": "rollup -c",
     "format": "yarn lint --fix",
-    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
-    "test": "exit 0",
-    "clean": "find . -name *.log -delete && rm -r dist"
+    "lint": "eslint . --ignore-path ../../.gitignore",
+    "clean": "rm -rf dist coverage junit.xml *.log",
+    "prepublishOnly": "yarn build"
   },
   "input": "src/index.ts",
   "main": "dist/cjs/index.js",
-  "esm": "dist/es/index.js",
-  "cjs": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
-  "exports": {
-    "require": "./dist/cjs/index.js",
-    "import": "./dist/es/index.js"
-  },
   "files": [
     "dist",
     "README.md",

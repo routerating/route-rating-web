@@ -1,8 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "declaration": false,
-    "composite": false
-  },
-  "exclude": ["**/*.spec.ts", "**/*.e2e.ts"],
-}

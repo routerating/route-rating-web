@@ -1,6 +1,11 @@
 import { Component, Host, h } from '@stencil/core'
 
-const NavigationLink = (props) => (
+interface NavigationLinkProps {
+  url: string
+  text: string
+}
+
+const NavigationLink = (props: NavigationLinkProps) => (
   <li>
     <stencil-route-link url={props.url} activeClass="active" exact={true}>
       {props.text}

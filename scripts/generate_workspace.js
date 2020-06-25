@@ -1,7 +1,10 @@
 #!/usr/bin/env node
 const fs = require('fs')
+const common = require('./common')
 
 const SHADOW_DIR = './.shadowroot'
+
+const { getFileOrDefault, getPackages } = common
 
 const workspace = {
   folders: [
@@ -12,14 +15,12 @@ const workspace = {
     { name: 'Documentation', path: 'docs' },
     { name: 'Configuration', path: 'configs' },
   ],
-  settings: JSON.parse(fs.readFileSync('./.vscode/settings.json') || '{}'),
-  launch: JSON.parse(fs.readFileSync('./.vscode/launch.json') || '{}'),
-  extensions: JSON.parse(fs.readFileSync('./.vscode/extensions.json') || '{}'),
+  settings: JSON.parse(getFileOrDefault('./.vscode/settings.json')),
+  launch: JSON.parse(getFileOrDefault('./.vscode/launch.json')),
+  extensions: JSON.parse(getFileOrDefault('./.vscode/extensions.json')),
 }
 
-const packages = JSON.parse(
-  fs.readFileSync('./lerna.json') || '{}'
-).packages.map((element) => element.replace('/*', ''))
+const packages = getPackages()
 
 packages.forEach((packageFolder) => {
   fs.readdirSync(packageFolder).forEach((package) => {
@@ -41,6 +42,8 @@ fs.readdirSync('.').forEach((element) => {
     !fs.statSync(element).isDirectory() &&
     !fs.existsSync(`${SHADOW_DIR}/${element}`)
   ) {
-    require('child_process').exec(`ln -s ./${element} ${SHADOW_DIR}/${element}`)
+    require('child_process').exec(
+      `ln -s ../${element} ${SHADOW_DIR}/${element}`
+    )
   }
 })
