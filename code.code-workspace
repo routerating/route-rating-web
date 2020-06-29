@@ -5,10 +5,6 @@
       "path": "./.shadowroot"
     },
     {
-      "name": "Project Scripts",
-      "path": "scripts"
-    },
-    {
       "name": "Github Settings",
       "path": ".github"
     },
@@ -41,11 +37,7 @@
       "path": "apps/web"
     }
   ],
-  "settings": {
-    "cSpell.words": [
-      "Prerender"
-    ]
-  },
+  "settings": {},
   "launch": {
     "configurations": [
       {
