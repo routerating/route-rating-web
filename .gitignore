@@ -79,7 +79,7 @@ log.txt
 
 .stencil/
 .idea/
-.vscode/
+.vscode/settings.json
 .sass-cache/
 .versions/
 node_modules/

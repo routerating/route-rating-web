@@ -1,0 +1,66 @@
+{
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Web: E2E Current",
+      "cwd": "${workspaceFolder:@routerating/web}",
+      "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+      "args": [
+        "test",
+        "--e2e",
+        "${relativeFile}"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Web: Spec Current",
+      "cwd": "${workspaceFolder:@routerating/web}",
+      "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+      "args": [
+        "test",
+        "--spec",
+        "${relativeFile}"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Web: Start",
+      "cwd": "${workspaceFolder:@routerating/web}",
+      "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+      "args": [
+        "build",
+        "--dev",
+        "--watch",
+        "--serve"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Web: Build",
+      "cwd": "${workspaceFolder:@routerating/web}",
+      "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+      "args": [
+        "build",
+        "--prerender",
+        "--log",
+        "--stats"
+      ],
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen",
+      "disableOptimisticBPs": true
+    }
+  ]
+}
