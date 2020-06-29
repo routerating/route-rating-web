@@ -47,7 +47,7 @@ jobs:
           node-version: '12.18'
       - run: yarn
       - run: yarn build
-      - run: NPM_TOKEN=${{ secrets.NPM_TOKEN }} yarn run lerna run publish from-package
+      - run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} yarn run lerna run publish from-package
   tag:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest

@@ -8,7 +8,6 @@ const SHADOW_DIR = './.shadowroot'
 const workspace = {
   folders: [
     { name: 'Project Files', path: SHADOW_DIR },
-    { name: 'Project Scripts', path: 'scripts' },
     { name: 'Github Settings', path: '.github' },
     { name: 'VS Code Settings', path: '.vscode' },
     { name: 'Documentation', path: 'docs' },
