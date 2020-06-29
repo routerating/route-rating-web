@@ -1,6 +1,6 @@
 import { createJsonRequest, sendRequest } from '../utils'
 
-import { User } from '@routerating/entities'
+import { User } from '@routerating/interfaces'
 
 export function login(email: string, password: string): Promise<Response> {
   return sendRequest(

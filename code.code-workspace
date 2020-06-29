@@ -33,11 +33,19 @@
       "path": "packages/requests"
     },
     {
+      "name": "@routerating/scripts",
+      "path": "packages/scripts"
+    },
+    {
       "name": "@routerating/web",
       "path": "apps/web"
     }
   ],
-  "settings": {},
+  "settings": {
+    "cSpell.words": [
+      "Prerender"
+    ]
+  },
   "launch": {
     "configurations": [
       {

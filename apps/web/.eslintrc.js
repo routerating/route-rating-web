@@ -8,5 +8,5 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 1,
     '@typescript-eslint/explicit-function-return-type': 0
   },
-  ignorePatterns: ['*.config.ts', '.eslintrc.js'],
+  ignorePatterns: ['.eslintrc.js'],
 }

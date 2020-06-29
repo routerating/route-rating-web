@@ -1,4 +1,4 @@
-import { Config } from '@stencil/core';
+import { Config } from '@stencil/core'
 import { sass } from '@stencil/sass'
 
 export const config: Config = {
@@ -9,25 +9,22 @@ export const config: Config = {
     {
       type: 'www',
       serviceWorker: {
-        globPatterns: [
-          '**/*.{js,css,json,html,ico,png}'
-        ],
-        unregister: true
+        globPatterns: ['**/*.{js,css,json,html,ico,png}'],
+        unregister: true,
       },
       prerenderConfig: './prerender.config.ts',
-      baseUrl: 'https://lukeshay.com/'
-    }
+      baseUrl: 'https://lukeshay.com/',
+    },
   ],
   plugins: [
     sass({
-      injectGlobalPaths: [
-        'src/global/variables.scss'
-      ]
-  })],
+      injectGlobalPaths: ['src/global/variables.scss'],
+    }),
+  ],
   testing: {
     ...require('../../configs/jest.config'),
-    testPathIgnorePatterns: ["src/__tests__"],
-    transform: undefined
+    testPathIgnorePatterns: ['src/__tests__'],
+    transform: undefined,
   },
-  tsconfig: './tsconfig.build.json'
-};
+  tsconfig: './tsconfig.build.json',
+}

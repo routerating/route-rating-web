@@ -1,9 +1,9 @@
 {
-  "name": "@routerating/entities",
+  "name": "@routerating/interfaces",
   "entries": [
     {
       "version": "0.0.2",
-      "tag": "@routerating/entities_v0.0.2",
+      "tag": "@routerating/interfaces_v0.0.2",
       "date": "Tue, 19 May 2020 13:31:56 GMT",
       "comments": {
         "patch": [

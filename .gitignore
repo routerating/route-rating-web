@@ -90,3 +90,4 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 .env
 junit.xml
+.envrc

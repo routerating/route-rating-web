@@ -22,7 +22,8 @@
   "module": "dist/es/index.js",
   "types": "dist/types/index.d.ts",
   "dependencies": {
-    "@routerating/interfaces": "^0.0.3"
+    "@routerating/interfaces": "^0.0.3",
+    "tslib": "^2.0.0"
   },
   "files": [
     "dist",

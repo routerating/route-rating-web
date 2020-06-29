@@ -35,6 +35,19 @@ jobs:
       - run: npm i -g yarn
       - run: yarn
       - run: yarn test
+  publish:
+    if: github.ref == 'refs/heads/master'
+    needs: ['build', 'test']
+    runs-on: ubuntu-latest
+    name: Publish
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.18'
+      - run: yarn
+      - run: yarn build
+      - run: NPM_TOKEN=${{ secrets.NPM_TOKEN }} yarn run lerna run publish from-package
   tag:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -48,11 +61,11 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           tag_prefix: "@routerating/requests@v"
           root: "packages/requests/package.json"
-      - name: Tag @routerating/entities
+      - name: Tag @routerating/interfaces
         uses: butlerlogic/action-autotag@stable
         with:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          tag_prefix: "@routerating/entities@v"
+          tag_prefix: "@routerating/interfaces@v"
           root: "packages/entities/package.json"
       - name: Tag @routerating/web
         uses: butlerlogic/action-autotag@stable

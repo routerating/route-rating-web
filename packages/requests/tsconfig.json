@@ -12,7 +12,7 @@
   ],
   "references": [
     {
-      "path": "../entities/tsconfig.json"
+      "path": "../interfaces/tsconfig.json"
     }
   ]
 }

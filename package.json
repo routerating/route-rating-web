@@ -3,15 +3,17 @@
   "private": true,
   "license": "MIT",
   "scripts": {
+    "bootstrap": "lerna bootstrap",
+    "build": "lerna run build",
     "bump": "HUSKY_BYPASS=true lerna version --no-git-tag-version --no-push",
     "postbump": "git add . && git commit -m 'chore: bump version'",
-    "test": "lerna run test",
-    "build": "lerna run build",
     "clean": "lerna run clean",
-    "lint": "lerna run lint && eslint scripts --ignore-path ./.gitignore",
-    "format": "lerna run format && eslint scripts --ignore-path ./.gitignore --fix",
-    "bootstrap": "lerna bootstrap",
-    "setup": "yarn && ./scripts/generate_workspace.js"
+    "format:markdown": "yarn lint:markdown --fix",
+    "format": "lerna run format && yarn format:markdown",
+    "lint:markdown": " markdownlint '**/README.md' --ignore '**/node_modules/**' --ignore '**/CHANGELOG.md'",
+    "lint": "lerna run lint && yarn lint:markdown",
+    "setup": "yarn && yarn bootstrap && yarn build && ./packages/scripts/dist/generateWorkspace.js",
+    "test": "lerna run test"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
@@ -27,8 +29,9 @@
     "jest": "^26.1.0",
     "jest-junit": "^11.0.1",
     "lerna": "^3.22.1",
+    "markdownlint-cli": "^0.23.1",
     "npm-check-updates": "^7.0.1",
-    "rollup": "^2.18.0",
+    "rollup": "^2.18.1",
     "typescript": "^3.9.5"
   },
   "workspaces": [
@@ -37,6 +40,7 @@
   ],
   "husky": {
     "hooks": {
+      "pre-stage": "yarn format",
       "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS"
     }
   },
