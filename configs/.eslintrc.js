@@ -13,12 +13,13 @@ module.exports = {
       },
     ],
     '@typescript-eslint/explicit-module-boundary-types': 0,
-    "no-unused-vars": 0,
+    'no-unused-vars': 0,
     '@typescript-eslint/no-unused-vars': 0,
-    '@typescript-eslint/no-unused-vars-experimental': 2
+    '@typescript-eslint/no-unused-vars-experimental': 2,
   },
   env: {
     jest: true,
-    browser: true
+    browser: true,
   },
+  ignorePatterns: ['dist/**/*'],
 }

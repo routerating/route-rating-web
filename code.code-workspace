@@ -21,6 +21,10 @@
       "path": "configs"
     },
     {
+      "name": "@routerating/components",
+      "path": "packages/components"
+    },
+    {
       "name": "@routerating/interfaces",
       "path": "packages/interfaces"
     },
