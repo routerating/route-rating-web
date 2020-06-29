@@ -1,11 +1,13 @@
 {
   "name": "@routerating/interfaces",
-  "private": true,
   "version": "0.0.3",
   "description": "Interfaces package for Route Rating.",
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prebuild": "yarn clean",
     "build": "rollup -c",

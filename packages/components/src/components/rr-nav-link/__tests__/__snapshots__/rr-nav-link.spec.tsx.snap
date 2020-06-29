@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rr-nav-link should match snapshot 1`] = `
+<rr-nav-link url="/some/url">
+  <!---->
+  <li>
+    <stencil-route-link activeclass="active" exact="" url="/some/url">
+      Some URL
+      <button>
+        A random button for testing
+      </button>
+      &lt;button&gt;A random button for testing&lt;/button&gt;
+    </stencil-route-link>
+  </li>
+</rr-nav-link>
+`;

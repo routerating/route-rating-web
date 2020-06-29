@@ -24,5 +24,7 @@ module.exports = {
   coverageReporters: ['lcov'],
   reporters: ['default', 'jest-junit'],
   // eslint-disable-next-line prettier/prettier
-  testRegex: '(test|spec).(js|jsx|ts|tsx)$'
+  testRegex: '(test|spec).(js|jsx|ts|tsx)$',
+  collectCoverage: true,
+  resetMocks: true,
 }

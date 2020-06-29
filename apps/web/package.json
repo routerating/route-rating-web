@@ -14,7 +14,6 @@
     "format": "yarn lint --fix",
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
-    "test:cov": "yarn test --coverage",
     "test:watch": "stencil test --spec --e2e --watchAll",
     "clean": "find . -name *.log -delete && rm -rf dist coverage www loader",
     "prepublishOnly": "yarn build"

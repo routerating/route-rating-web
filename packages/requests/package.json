@@ -1,18 +1,19 @@
 {
   "name": "@routerating/requests",
-  "private": true,
   "version": "0.0.5",
   "description": "Requests package for Route Rating.",
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
     "prebuild": "yarn clean",
     "build": "rollup -c",
     "format": "yarn lint --fix",
     "lint": "eslint . --ignore-path ../../.gitignore",
     "test": "jest",
-    "test:cov": "jest --coverage",
     "watch": "rollup -cw",
     "clean": "rm -rf dist coverage junit.xml *.log",
     "prepublishOnly": "yarn build"

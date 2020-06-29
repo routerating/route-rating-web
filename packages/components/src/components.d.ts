@@ -6,56 +6,53 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
-    interface MyComponent {
+    interface RrNavBar {
+    }
+    interface RrNavLink {
         /**
-          * The first name
+          * The relative URL where this should link to.
          */
-        "first": string;
-        /**
-          * The last name
-         */
-        "last": string;
-        /**
-          * The middle name
-         */
-        "middle": string;
+        "url": string;
     }
 }
 declare global {
-    interface HTMLMyComponentElement extends Components.MyComponent, HTMLStencilElement {
+    interface HTMLRrNavBarElement extends Components.RrNavBar, HTMLStencilElement {
     }
-    var HTMLMyComponentElement: {
-        prototype: HTMLMyComponentElement;
-        new (): HTMLMyComponentElement;
+    var HTMLRrNavBarElement: {
+        prototype: HTMLRrNavBarElement;
+        new (): HTMLRrNavBarElement;
+    };
+    interface HTMLRrNavLinkElement extends Components.RrNavLink, HTMLStencilElement {
+    }
+    var HTMLRrNavLinkElement: {
+        prototype: HTMLRrNavLinkElement;
+        new (): HTMLRrNavLinkElement;
     };
     interface HTMLElementTagNameMap {
-        "my-component": HTMLMyComponentElement;
+        "rr-nav-bar": HTMLRrNavBarElement;
+        "rr-nav-link": HTMLRrNavLinkElement;
     }
 }
 declare namespace LocalJSX {
-    interface MyComponent {
+    interface RrNavBar {
+    }
+    interface RrNavLink {
         /**
-          * The first name
+          * The relative URL where this should link to.
          */
-        "first"?: string;
-        /**
-          * The last name
-         */
-        "last"?: string;
-        /**
-          * The middle name
-         */
-        "middle"?: string;
+        "url": string;
     }
     interface IntrinsicElements {
-        "my-component": MyComponent;
+        "rr-nav-bar": RrNavBar;
+        "rr-nav-link": RrNavLink;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
-            "my-component": LocalJSX.MyComponent & JSXBase.HTMLAttributes<HTMLMyComponentElement>;
+            "rr-nav-bar": LocalJSX.RrNavBar & JSXBase.HTMLAttributes<HTMLRrNavBarElement>;
+            "rr-nav-link": LocalJSX.RrNavLink & JSXBase.HTMLAttributes<HTMLRrNavLinkElement>;
         }
     }
 }
