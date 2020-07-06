@@ -6,6 +6,44 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface RrInput {
+        /**
+          * Stores the autocomplete value of the input element.
+         */
+        "autocomplete": string;
+        /**
+          * Returns the value of the input.
+         */
+        "getValue": () => Promise<string | undefined>;
+        /**
+          * The label for the input.
+         */
+        "label": string;
+        /**
+          * The minimum date an input can be.
+         */
+        "min": string;
+        /**
+          * Stores the name of the input element.
+         */
+        "name": string;
+        /**
+          * The allowed patterns for the input.
+         */
+        "pattern": string;
+        /**
+          * Whether the input is required.
+         */
+        "required": boolean;
+        /**
+          * Sets the value of the input.
+         */
+        "setValue": (value: string) => Promise<void>;
+        /**
+          * The type of the input.
+         */
+        "type": string;
+    }
     interface RrNavBar {
     }
     interface RrNavLink {
@@ -16,6 +54,12 @@ export namespace Components {
     }
 }
 declare global {
+    interface HTMLRrInputElement extends Components.RrInput, HTMLStencilElement {
+    }
+    var HTMLRrInputElement: {
+        prototype: HTMLRrInputElement;
+        new (): HTMLRrInputElement;
+    };
     interface HTMLRrNavBarElement extends Components.RrNavBar, HTMLStencilElement {
     }
     var HTMLRrNavBarElement: {
@@ -29,11 +73,46 @@ declare global {
         new (): HTMLRrNavLinkElement;
     };
     interface HTMLElementTagNameMap {
+        "rr-input": HTMLRrInputElement;
         "rr-nav-bar": HTMLRrNavBarElement;
         "rr-nav-link": HTMLRrNavLinkElement;
     }
 }
 declare namespace LocalJSX {
+    interface RrInput {
+        /**
+          * Stores the autocomplete value of the input element.
+         */
+        "autocomplete"?: string;
+        /**
+          * The label for the input.
+         */
+        "label"?: string;
+        /**
+          * The minimum date an input can be.
+         */
+        "min"?: string;
+        /**
+          * Stores the name of the input element.
+         */
+        "name"?: string;
+        /**
+          * Tracks changes to the value field of the input
+         */
+        "onRrInputValueChanged"?: (event: CustomEvent<HTMLRrInputElement>) => void;
+        /**
+          * The allowed patterns for the input.
+         */
+        "pattern"?: string;
+        /**
+          * Whether the input is required.
+         */
+        "required"?: boolean;
+        /**
+          * The type of the input.
+         */
+        "type"?: string;
+    }
     interface RrNavBar {
     }
     interface RrNavLink {
@@ -43,6 +122,7 @@ declare namespace LocalJSX {
         "url": string;
     }
     interface IntrinsicElements {
+        "rr-input": RrInput;
         "rr-nav-bar": RrNavBar;
         "rr-nav-link": RrNavLink;
     }
@@ -51,6 +131,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "rr-input": LocalJSX.RrInput & JSXBase.HTMLAttributes<HTMLRrInputElement>;
             "rr-nav-bar": LocalJSX.RrNavBar & JSXBase.HTMLAttributes<HTMLRrNavBarElement>;
             "rr-nav-link": LocalJSX.RrNavLink & JSXBase.HTMLAttributes<HTMLRrNavLinkElement>;
         }

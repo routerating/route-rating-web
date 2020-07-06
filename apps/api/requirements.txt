@@ -1,0 +1,8 @@
+bcrypt
+boto3
+mock
+munch
+Py3DNS
+PyJWT
+pynamodb
+validate_email

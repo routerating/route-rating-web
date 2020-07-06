@@ -8,12 +8,16 @@
     "bump": "HUSKY_BYPASS=true lerna version --no-git-tag-version --no-push",
     "postbump": "git add . && git commit -m 'chore: bump version'",
     "clean": "lerna run clean",
-    "format:markdown": "yarn lint:markdown --fix",
-    "format": "lerna run format && yarn format:markdown",
-    "lint:markdown": " markdownlint '**/README.md' --ignore '**/node_modules/**' --ignore '**/CHANGELOG.md'",
-    "lint": "lerna run lint && yarn lint:markdown",
+    "format": "lerna run format",
+    "lint": "lerna run lint",
     "setup": "yarn && yarn bootstrap && yarn build && ./packages/scripts/dist/generateWorkspace.js",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "update-workflow": "./.github/convert.sh",
+
+    "test:int:dev": "lerna run test:int:dev",
+    "test:int:prod": "lerna run test:int:prod",
+    "deploy:dev": "lerna run deploy:dev",
+    "deploy:prod": "lerna run deploy:prod"
   },
   "devDependencies": {
     "@commitlint/cli": "^9.0.1",
@@ -31,7 +35,6 @@
     "jest": "^26.1.0",
     "jest-junit": "^11.0.1",
     "lerna": "^3.22.1",
-    "markdownlint-cli": "^0.23.1",
     "npm-check-updates": "^7.0.1",
     "rollup": "^2.18.1",
     "typescript": "^3.9.5"

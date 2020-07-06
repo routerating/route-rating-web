@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-sign-in-page should match snapshot 1`] = `
+<app-sign-in-page>
+  <mock:shadow-root>
+    <app-form>
+      <h1 class="centered">
+        Sign In
+      </h1>
+      <form>
+        <rr-input label="Email" required="" type="text"></rr-input>
+        <rr-input label="Password" required="" type="password"></rr-input>
+        <button class="purple-button">
+          Sign In
+        </button>
+      </form>
+    </app-form>
+  </mock:shadow-root>
+</app-sign-in-page>
+`;

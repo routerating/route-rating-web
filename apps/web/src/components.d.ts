@@ -6,16 +6,28 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 export namespace Components {
+    interface AppForm {
+    }
     interface AppHome {
     }
     interface AppNavigation {
     }
-    interface AppProfile {
+    interface AppProfilePage {
     }
     interface AppRoot {
     }
+    interface AppSignInPage {
+    }
+    interface AppSignUpPage {
+    }
 }
 declare global {
+    interface HTMLAppFormElement extends Components.AppForm, HTMLStencilElement {
+    }
+    var HTMLAppFormElement: {
+        prototype: HTMLAppFormElement;
+        new (): HTMLAppFormElement;
+    };
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
     }
     var HTMLAppHomeElement: {
@@ -28,11 +40,11 @@ declare global {
         prototype: HTMLAppNavigationElement;
         new (): HTMLAppNavigationElement;
     };
-    interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
+    interface HTMLAppProfilePageElement extends Components.AppProfilePage, HTMLStencilElement {
     }
-    var HTMLAppProfileElement: {
-        prototype: HTMLAppProfileElement;
-        new (): HTMLAppProfileElement;
+    var HTMLAppProfilePageElement: {
+        prototype: HTMLAppProfilePageElement;
+        new (): HTMLAppProfilePageElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -40,37 +52,64 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
+    interface HTMLAppSignInPageElement extends Components.AppSignInPage, HTMLStencilElement {
+    }
+    var HTMLAppSignInPageElement: {
+        prototype: HTMLAppSignInPageElement;
+        new (): HTMLAppSignInPageElement;
+    };
+    interface HTMLAppSignUpPageElement extends Components.AppSignUpPage, HTMLStencilElement {
+    }
+    var HTMLAppSignUpPageElement: {
+        prototype: HTMLAppSignUpPageElement;
+        new (): HTMLAppSignUpPageElement;
+    };
     interface HTMLElementTagNameMap {
+        "app-form": HTMLAppFormElement;
         "app-home": HTMLAppHomeElement;
         "app-navigation": HTMLAppNavigationElement;
-        "app-profile": HTMLAppProfileElement;
+        "app-profile-page": HTMLAppProfilePageElement;
         "app-root": HTMLAppRootElement;
+        "app-sign-in-page": HTMLAppSignInPageElement;
+        "app-sign-up-page": HTMLAppSignUpPageElement;
     }
 }
 declare namespace LocalJSX {
+    interface AppForm {
+    }
     interface AppHome {
     }
     interface AppNavigation {
     }
-    interface AppProfile {
+    interface AppProfilePage {
     }
     interface AppRoot {
     }
+    interface AppSignInPage {
+    }
+    interface AppSignUpPage {
+    }
     interface IntrinsicElements {
+        "app-form": AppForm;
         "app-home": AppHome;
         "app-navigation": AppNavigation;
-        "app-profile": AppProfile;
+        "app-profile-page": AppProfilePage;
         "app-root": AppRoot;
+        "app-sign-in-page": AppSignInPage;
+        "app-sign-up-page": AppSignUpPage;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
             "app-navigation": LocalJSX.AppNavigation & JSXBase.HTMLAttributes<HTMLAppNavigationElement>;
-            "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
+            "app-profile-page": LocalJSX.AppProfilePage & JSXBase.HTMLAttributes<HTMLAppProfilePageElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
+            "app-sign-in-page": LocalJSX.AppSignInPage & JSXBase.HTMLAttributes<HTMLAppSignInPageElement>;
+            "app-sign-up-page": LocalJSX.AppSignUpPage & JSXBase.HTMLAttributes<HTMLAppSignUpPageElement>;
         }
     }
 }

@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-navigation should match snapshot 1`] = `
+<app-navigation>
+  <mock:shadow-root>
+    <rr-nav-bar>
+      <div class="nav-group" id="desktop-nav">
+        <rr-nav-link url="/">
+          Home
+        </rr-nav-link>
+        <rr-nav-link url="/gyms">
+          Gyms
+        </rr-nav-link>
+        <rr-nav-link url="/profile">
+          Profile
+        </rr-nav-link>
+      </div>
+      <div class="nav-group" id="mobile-nav">
+        <rr-nav-link url="/">
+          Home
+        </rr-nav-link>
+        <rr-nav-link url="/gyms">
+          Gyms
+        </rr-nav-link>
+        <rr-nav-link url="/profile">
+          Profile
+        </rr-nav-link>
+      </div>
+    </rr-nav-bar>
+  </mock:shadow-root>
+</app-navigation>
+`;

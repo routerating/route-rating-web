@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-form should match snapshot 1`] = `
+<app-form>
+  <!---->
+  <div id="form-box"></div>
+</app-form>
+`;

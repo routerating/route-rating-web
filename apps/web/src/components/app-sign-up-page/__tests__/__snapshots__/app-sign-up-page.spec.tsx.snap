@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-sign-up-page should have match snapshot 1`] = `
+<app-sign-up-page>
+  <mock:shadow-root>
+    <slot></slot>
+  </mock:shadow-root>
+</app-sign-up-page>
+`;

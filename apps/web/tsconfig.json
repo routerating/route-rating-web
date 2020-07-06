@@ -1,9 +1,6 @@
 {
   "$schema": "http://json.schemastore.org/tsconfig",
   "extends": "../../configs/tsconfig.json",
-  "compilerOptions": {
-    "allowJs": true
-  },
   "include": [
     "src",
     "stencil.config.ts",
@@ -15,6 +12,12 @@
     },
     {
       "path": "../../packages/requests/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/tsconfig.build.json"
+    },
+    {
+      "path": "../../packages/stencil-styled-components/tsconfig.json"
     }
   ]
 }

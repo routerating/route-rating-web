@@ -37,11 +37,32 @@
       "path": "packages/scripts"
     },
     {
+      "name": "@routerating/stencil-styled-components",
+      "path": "packages/stencil-styled-components"
+    },
+    {
+      "name": "@routerating/.DS_Store",
+      "path": "apps/.DS_Store"
+    },
+    {
+      "name": "@routerating/api",
+      "path": "apps/api"
+    },
+    {
       "name": "@routerating/web",
       "path": "apps/web"
     }
   ],
-  "settings": {},
+  "settings": {
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.pythonPath": ".venv/bin/python",
+    "python.linting.pylintEnabled": true,
+    "cSpell.words": [
+      "getenv",
+      "pynamodb"
+    ]
+  },
   "launch": {
     "configurations": [
       {

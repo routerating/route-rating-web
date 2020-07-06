@@ -1,0 +1,5 @@
+black
+mypy
+pytest
+pytest-cov
+pytest-xdist

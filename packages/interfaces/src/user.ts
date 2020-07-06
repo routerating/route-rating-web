@@ -1,19 +1,20 @@
 import { Session } from './session'
 
-export interface User {
-  authority: string
+export interface BaseUser {
   city: string
-  country: string
   email: string
   firstName: string
-  id: string
   lastName: string
   password: string
   phoneNumber: string
-  role: string
-  session: Session | null
   state: string
-  username: string
+}
+
+export interface User extends BaseUser {
+  authority: string
+  id: string
+  role: string
+  session?: Session
 }
 
 export interface RecaptchaUser extends User {

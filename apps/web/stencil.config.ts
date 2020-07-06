@@ -18,7 +18,7 @@ export const config: Config = {
   ],
   plugins: [
     sass({
-      injectGlobalPaths: ['src/global/variables.scss'],
+      injectGlobalPaths: ['src/global/variables.scss', 'src/global/app.scss'],
     }),
   ],
   testing: {

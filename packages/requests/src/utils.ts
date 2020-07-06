@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 export async function sendRequest(request: Request): Promise<Response> {
-  let url = `${process.env.API_URL}/${request.path}`
+  let url = `${request.url}/${request.path}`
 
   if (request.queryParams) url += `?${request.queryParams}`
 
@@ -30,9 +30,11 @@ export interface Request {
   path: string
   queryParams?: string
   refresh?: string
+  url: string
 }
 
 export function createJsonRequest(
+  url: string,
   path: string,
   queryParams: string | undefined,
   method: 'PUT' | 'POST' | 'GET',
@@ -49,5 +51,6 @@ export function createJsonRequest(
     refresh,
     body: JSON.stringify(body),
     contentType: 'application/json',
+    url,
   }
 }

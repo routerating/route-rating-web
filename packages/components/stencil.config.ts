@@ -12,10 +12,6 @@ export const config: Config = {
       type: 'docs-readme',
       strict: true,
     },
-    {
-      type: 'www',
-      serviceWorker: null, // disable service workers
-    },
   ],
   testing: {
     ...require('../../configs/jest.config'),

@@ -1,0 +1,618 @@
+true:
+- push
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn build
+  deploy-dev:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy dev
+    needs:
+    - lint
+    - test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        yarn deploy:dev
+  deploy-prod:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy prod
+    needs:
+    - integration-test-remote
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        yarn deploy:prod
+  integration-test-remote:
+    name: Integration test remote
+    needs:
+    - deploy-dev
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} \
+        TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} \
+        TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} \
+        yarn test:int:dev
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn lint
+  publish:
+    if: github.ref == 'refs/heads/master'
+    name: Publish
+    needs:
+    - build
+    - test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} yarn run lerna run publish
+        from-package
+  smoke-test:
+    name: Smoke test
+    needs:
+    - deploy-prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} \
+        TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} \
+        TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} \
+        yarn test:int:prod
+  tag:
+    if: github.ref == 'refs/heads/master'
+    name: Tag
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Tag @routerating/requests
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: packages/requests/package.json
+        tag_prefix: '@routerating/requests@v'
+    - name: Tag @routerating/interfaces
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: packages/entities/package.json
+        tag_prefix: '@routerating/interfaces@v'
+    - name: Tag @routerating/web
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: apps/web/package.json
+        tag_prefix: '@routerating/web@v'
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn test
+name: CI
+x-setup-job:
+- uses: actions/checkout@v2
+- uses: actions/setup-node@v1
+  with:
+    node-version: "12.18"
+- name: Setup python
+  uses: actions/setup-python@v1
+  with:
+    python-version: "3.8"
+
+true:
+- push
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn build
+  deploy-dev:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy dev
+    needs:
+    - lint
+    - test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        yarn deploy:dev
+  deploy-prod:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy prod
+    needs:
+    - integration-test-remote
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        yarn deploy:prod
+  integration-test-remote:
+    name: Integration test remote
+    needs:
+    - deploy-dev
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} \
+        TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} \
+        TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} \
+        yarn test:int:dev
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn lint
+  publish:
+    if: github.ref == 'refs/heads/master'
+    name: Publish
+    needs:
+    - build
+    - test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} yarn run lerna run publish
+        from-package
+  smoke-test:
+    name: Smoke test
+    needs:
+    - deploy-prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} \
+        TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} \
+        TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} \
+        yarn test:int:prod
+  tag:
+    if: github.ref == 'refs/heads/master'
+    name: Tag
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Tag @routerating/requests
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: packages/requests/package.json
+        tag_prefix: '@routerating/requests@v'
+    - name: Tag @routerating/interfaces
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: packages/entities/package.json
+        tag_prefix: '@routerating/interfaces@v'
+    - name: Tag @routerating/web
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: apps/web/package.json
+        tag_prefix: '@routerating/web@v'
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn test
+name: CI
+
+true:
+- push
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - run: yarn build
+  deploy-dev:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy dev
+    needs:
+    - lint
+    - test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        yarn deploy:dev
+  deploy-prod:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy prod
+    needs:
+    - integration-test-remote
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        yarn deploy:prod
+  integration-test-remote:
+    name: Integration test remote
+    needs:
+    - deploy-dev
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} \
+        TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} \
+        TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} \
+        yarn test:int:dev
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn lint
+  publish:
+    if: github.ref == 'refs/heads/master'
+    name: Publish
+    needs:
+    - build
+    - test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} yarn run lerna run publish
+        from-package
+  smoke-test:
+    name: Smoke test
+    needs:
+    - deploy-prod
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Setup node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.x
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-region: us-east-2
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    - run: ./.github/workflows/setup.sh
+    - run: |
+        JWT_SECRET=${{ secrets.JWT_SECRET }} \
+        REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
+        TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} \
+        TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} \
+        TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} \
+        yarn test:int:prod
+  tag:
+    if: github.ref == 'refs/heads/master'
+    name: Tag
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Tag @routerating/requests
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: packages/requests/package.json
+        tag_prefix: '@routerating/requests@v'
+    - name: Tag @routerating/interfaces
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: packages/entities/package.json
+        tag_prefix: '@routerating/interfaces@v'
+    - name: Tag @routerating/web
+      uses: butlerlogic/action-autotag@stable
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        root: apps/web/package.json
+        tag_prefix: '@routerating/web@v'
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
+      with:
+        node-version: "12.18"
+    - name: Setup python
+      uses: actions/setup-python@v1
+      with:
+        python-version: "3.8"
+    - run: ./.github/workflows/setup.sh
+    - run: yarn test
+meta:
+  setup_job:
+    name: Checkout code
+    uses: actions/checkout@v2
+name: CI
+

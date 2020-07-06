@@ -1,0 +1,74 @@
+:host {
+  display: block;
+
+  #form-box {
+    box-sizing: border-box;
+
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
+
+
+    h1 {
+      margin-top: 0;
+    }
+
+
+    margin: 2rem auto;
+    width: 100%;
+    max-width: 30rem;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 0.5rem;
+  }
+
+  rr-input {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    input, textarea {
+      box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      outline: none;
+      display: block;
+      width: 100%;
+      padding: 7px;
+      border: none;
+      border-bottom: 1px solid #ddd;
+      background: transparent;
+      margin-bottom: 10px;
+      height: 45px;
+      font-size: inherit;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+    }
+
+    textarea {
+      height: auto;
+      font-family: inherit;
+      resize: none;
+    }
+
+    select {
+      width: 100%;
+      border-radius: 5px;
+      border: 1px solid #ddd;
+      height: 45px;
+      padding: 0 .5rem;
+      background: url($select-menu-arrow) no-repeat right 1em center;
+      -webkit-appearance: none;
+      cursor: pointer;
+      font-size: inherit;
+      margin-bottom: 10px;
+    }
+  }
+}

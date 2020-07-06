@@ -1,0 +1,40 @@
+{
+  "name": "@routerating/stencil-styled-components",
+  "version": "1.4.0",
+  "description": "Small library to bring the concept of styled-components to StencilJS.",
+  "input": "src/index.js",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "yarn clean",
+    "build": "rollup -c",
+    "postbuild": "cp -r types dist/types",
+    "format": "yarn lint --fix",
+    "lint": "eslint . --ignore-path ../../.gitignore",
+    "clean": "rm -rf dist coverage junit.xml *.log",
+    "prepublishOnly": "yarn build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelauderer/stencil-styled-components.git"
+  },
+  "keywords": [
+    "stencil",
+    "stenciljs",
+    "styled",
+    "styled-components"
+  ],
+  "author": "Luke Shay <https://github.com/LukeShay>",
+  "license": "MIT",
+  "peerDependencies": {
+    "@stencil/core": "^1.15.0"
+  },
+  "dependencies": {
+    "@stencil/core": "^1.15.0",
+    "node-sass": "^4.14.1"
+  }
+}
