@@ -20,7 +20,7 @@ x-setup-aws: &setup-aws
     aws-region: us-east-2
 x-setup-script: &setup-script
   name: Setup script
-  run: ./.github/workflows/setup.sh
+  run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -85,6 +85,18 @@ jobs:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           tag_prefix: "@routerating/web@v"
           root: "apps/web/package.json"
+      - name: Tag @routerating/scripts
+        uses: butlerlogic/action-autotag@stable
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          tag_prefix: "@routerating/scripts@v"
+          root: "packages/scripts/package.json"
+      - name: Tag @routerating/components
+        uses: butlerlogic/action-autotag@stable
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          tag_prefix: "@routerating/components@v"
+          root: "packages/components/package.json"
   deploy-dev:
     if: github.ref == 'refs/heads/master'
     needs: [lint, test]
