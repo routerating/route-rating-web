@@ -20,7 +20,7 @@ x-setup-aws: &setup-aws
     aws-region: us-east-2
 x-setup-script: &setup-script
   name: Setup script
-  run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+  run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} ./.github/workflows/setup.sh
 jobs:
   build:
     runs-on: ubuntu-latest
