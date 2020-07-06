@@ -1,9 +1,14 @@
 name: CI
 on: [push]
+x-common-env:
+  env:
+    NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
 jobs:
   build:
     runs-on: ubuntu-latest
     name: Build
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -16,11 +21,13 @@ jobs:
       with:
         python-version: '3.8'
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+      run: "./.github/workflows/setup.sh"
     - run: yarn build
   lint:
     runs-on: ubuntu-latest
     name: Lint
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -33,11 +40,13 @@ jobs:
       with:
         python-version: '3.8'
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+      run: "./.github/workflows/setup.sh"
     - run: yarn lint
   test:
     runs-on: ubuntu-latest
     name: Test
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -50,7 +59,7 @@ jobs:
       with:
         python-version: '3.8'
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+      run: "./.github/workflows/setup.sh"
     - run: yarn test
   publish:
     if: github.ref == 'refs/heads/master'
@@ -59,6 +68,8 @@ jobs:
     - test
     runs-on: ubuntu-latest
     name: Publish
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -71,8 +82,8 @@ jobs:
       with:
         python-version: '3.8'
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
-    - run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }} yarn run lerna run publish from-package
+      run: "./.github/workflows/setup.sh"
+    - run: yarn run lerna run publish from-package
   tag:
     if: github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
@@ -117,6 +128,8 @@ jobs:
     - test
     runs-on: ubuntu-latest
     name: Deploy dev
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -135,7 +148,7 @@ jobs:
         aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         aws-region: us-east-2
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+      run: "./.github/workflows/setup.sh"
     - run: |
         JWT_SECRET=${{ secrets.JWT_SECRET }} \
         REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
@@ -145,6 +158,8 @@ jobs:
     needs:
     - deploy-dev
     name: Integration test remote
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -163,7 +178,7 @@ jobs:
         aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         aws-region: us-east-2
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+      run: "./.github/workflows/setup.sh"
     - run: |
         JWT_SECRET=${{ secrets.JWT_SECRET }} \
         REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
@@ -177,6 +192,8 @@ jobs:
     - integration-test-remote
     runs-on: ubuntu-latest
     name: Deploy prod
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -195,7 +212,7 @@ jobs:
         aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         aws-region: us-east-2
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+      run: "./.github/workflows/setup.sh"
     - run: |
         JWT_SECRET=${{ secrets.JWT_SECRET }} \
         REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
@@ -205,6 +222,8 @@ jobs:
     needs:
     - deploy-prod
     name: Smoke test
+    env:
+      NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
@@ -223,7 +242,7 @@ jobs:
         aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
         aws-region: us-east-2
     - name: Setup script
-      run: NPM_AUTH_TOKEN=${{ secrets.NPM_AUTH_TOKEN }}./.github/workflows/setup.sh
+      run: "./.github/workflows/setup.sh"
     - run: |
         JWT_SECRET=${{ secrets.JWT_SECRET }} \
         REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} \
