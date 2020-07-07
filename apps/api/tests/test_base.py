@@ -8,13 +8,11 @@ from api.users.users_service import UsersService
 
 
 class TestBase(TestCase):
-    os.environ["TEST_RUN"] = "TRUE"
-    # os.environ["LOG"] = "TRUE"
-
     @classmethod
     def setUpClass(cls):
-        cls.mock_create_database_session = Mock()
-        boto3.resource = cls.mock_create_database_session
+        os.environ["TEST_RUN"] = "TRUE"
+        os.environ["IS_OFFLINE"] = "TRUE"
+        os.environ["DYNAMODB_USERS_TABLE"] = "users-table"
 
         cls.users_service = UsersService()
         cls.mock_validate_email = Mock(return_value=True)

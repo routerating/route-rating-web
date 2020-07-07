@@ -387,3 +387,4 @@ dmypy.json
 
 test_output/
 .envrc
+.dynamodb/

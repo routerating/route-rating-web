@@ -7,13 +7,14 @@ import json
 import os
 
 
-class UserEmailIndex(GlobalSecondaryIndex):
+class IdIndex(GlobalSecondaryIndex):
     class Meta:
-        index_name = f"{os.getenv('DYNAMODB_USERS_TABLE', '')}-email-index"
-        read_capacity_units = 1
-        write_capacity_units = 1
+        index_name = f"{os.getenv('DYNAMODB_USERS_TABLE', '')}-id-index"
+        read_capacity_units = 10
+        write_capacity_units = 20
         projection = AllProjection()
-    email = UnicodeAttribute(attr_name="Email", hash_key=True)
+
+    id = UnicodeAttribute(attr_name="Id", hash_key=True)
 
 
 class User(Model):
@@ -21,25 +22,29 @@ class User(Model):
         table_name = os.getenv("DYNAMODB_USERS_TABLE", "")
         region = get_region()
         endpoint = get_endpoint()
-        read_capacity_units = 1
-        write_capacity_units = 1
+        read_capacity_units = 10
+        write_capacity_units = 20
 
-    user_id = UnicodeAttribute(attr_name="Id", hash_key=True)
+    id = UnicodeAttribute(attr_name="Id")
+    id_index = IdIndex()
+    email = UnicodeAttribute(attr_name="Email", hash_key=True)
     first_name = UnicodeAttribute(attr_name="FirstName")
     last_name = UnicodeAttribute(attr_name="LastName")
-    email = UnicodeAttribute(attr_name="Email")
-    email_index = UserEmailIndex()
     phone_number = UnicodeAttribute(attr_name="PhoneNumber")
     city = UnicodeAttribute(attr_name="City")
     state = UnicodeAttribute(attr_name="State")
     password = UnicodeAttribute(attr_name="Password")
     authority = UnicodeAttribute(attr_name="Authority")
     role = UnicodeAttribute(attr_name="Role")
-    last_updated = UTCDateTimeAttribute()
-    created = UTCDateTimeAttribute(default=datetime.now)
+    last_updated = UTCDateTimeAttribute(attr_name="LastUpdated")
+    created = UTCDateTimeAttribute(attr_name="Created", default=datetime.now)
 
     def all_fields_present(self) -> bool:
-        return self.user_id != None and self.created != None and self.new_user_fields_present()
+        return (
+            self.id != None
+            and self.created != None
+            and self.new_user_fields_present()
+        )
 
     def new_user_fields_present(self) -> bool:
         return (
@@ -58,7 +63,7 @@ class User(Model):
             body = json.loads(body)
 
         return cls(
-            user_id=body.get("id", None),
+            id=body.get("id", None),
             password=body.get("password", None),
             city=body.get("city", None),
             state=body.get("state", None),
@@ -76,7 +81,7 @@ class User(Model):
             body = json.loads(body)
 
         return cls(
-            user_id=body.get("id", None),
+            id=body.get("id", None),
             password=body.get("password", None),
             city=body.get("city", None),
             state=body.get("state", None),
@@ -94,7 +99,7 @@ class User(Model):
             body = json.loads(body)
 
         return cls(
-            user_id=body.get("Id", None),
+            id=body.get("Id", None),
             password=body.get("Password", None),
             city=body.get("City", None),
             state=body.get("State", None),
@@ -121,7 +126,7 @@ class User(Model):
 
     def as_camel_dict(self) -> dict:
         return {
-            "id": self.user_id,
+            "id": self.id,
             "password": self.password,
             "city": self.city,
             "state": self.state,
@@ -135,7 +140,7 @@ class User(Model):
 
     def as_snake_dict(self) -> dict:
         return {
-            "id": self.user_id,
+            "id": self.id,
             "password": self.password,
             "city": self.city,
             "state": self.state,
@@ -163,7 +168,7 @@ class User(Model):
 
         user.first_name = self.first_name if self.first_name else other.first_name
         user.last_name = self.last_name if self.last_name else other.last_name
-        user.id = self.user_id if self.user_id else other.id
+        user.id = self.id if self.id else other.id
         user.password = self.password if self.password else other.password
         user.email = self.email if self.email else other.email
         user.city = self.city if self.city else other.city

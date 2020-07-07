@@ -1,5 +1,6 @@
 black
 mypy
 pytest
+pytest-dynamodb
 pytest-cov
 pytest-xdist

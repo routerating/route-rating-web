@@ -1,5 +1,5 @@
 {
-  "name": "route-rating-serverless",
+  "name": "api",
   "version": "0.0.1",
   "description": "Serverless HTTP services for Route Rating.",
   "author": "Luke Shay <https://github.com/LukeShay>",
@@ -12,7 +12,7 @@
     "deploy:prod": "serverless deploy --stage prod",
     "pretest": "yarn clean",
     "test": "yarn test:unit && yarn test:int:local",
-    "test:unit": "python -m pytest --junitxml=./test_output/test-report.xml --cov=api --cov-report=xml:test_output/coverage.xml --cov-report=html:test_output/coverage tests",
+    "test:unit": "python -m pytest",
     "test:int:local": "./tests/integration/test.sh test-local dev",
     "test:int:dev": "./tests/integration/test.sh test-remote dev",
     "test:int:prod": "./tests/integration/test.sh test-remote prod",

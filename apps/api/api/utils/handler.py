@@ -10,8 +10,8 @@ from api.utils.api_gateway import ApiGatewayEvent
 
 def validate_kwargs(*args):
     logging.debug("ARGS: " + str(args[0][0]))
-    # if len(args[0][0]) != 2:
-    #     raise InvalidRequestException
+    if len(args[0][0]) != 2:
+        raise InvalidRequestException
 
     return args[0][0], None
 
@@ -48,9 +48,12 @@ def validate_jwt(function, event, context, admin_auth):
 def handler():
     def decorator(function):
         def wrapper(*args, **kwargs):
-            setup_logger()
-            event, context = validate_kwargs(args, kwargs)
-            return function(ApiGatewayEvent(event, context))
+            try:
+                setup_logger()
+                event, context = validate_kwargs(args, kwargs)
+                return function(ApiGatewayEvent(event, context))
+            except:
+                return ApiGatewayEvent(None, None).internal_server_error_response()
 
         return wrapper
 
@@ -60,9 +63,12 @@ def handler():
 def admin_handler():
     def decorator(function):
         def wrapper(*args, **kwargs):
-            setup_logger()
-            event, context = validate_kwargs(args)
-            return validate_jwt(function, event, context, True)
+            try:
+                setup_logger()
+                event, context = validate_kwargs(args)
+                return validate_jwt(function, event, context, True)
+            except:
+                return ApiGatewayEvent(None, None).internal_server_error_response()
 
         return wrapper
 
@@ -72,10 +78,12 @@ def admin_handler():
 def basic_handler():
     def decorator(function):
         def wrapper(*args, **kwargs):
-            setup_logger()
-            event, context = validate_kwargs(args)
-            print("YEET: " + str(event))
-            return validate_jwt(function, event, context, False)
+            try:
+                setup_logger()
+                event, context = validate_kwargs(args)
+                return validate_jwt(function, event, context, False)
+            except:
+                return ApiGatewayEvent(None, None).internal_server_error_response()
 
         return wrapper
 

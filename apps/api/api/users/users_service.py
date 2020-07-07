@@ -3,7 +3,7 @@ from api.utils.auth import Jwt
 from api.utils.decorators import log
 from api.utils.regex import RegexUtils
 from datetime import datetime
-from pynamodb.exceptions import UpdateError
+from pynamodb.exceptions import DoesNotExist, UpdateError
 from typing import Optional, Dict, Tuple
 from validate_email import validate_email
 import bcrypt
@@ -51,14 +51,10 @@ class UsersService:
 
     @staticmethod
     def get_user_by_email(request_user: User) -> Optional[User]:
-        user_iterator = User.email_index.query(request_user.email)
-
-        if user_iterator.total_count == 0:
+        try:
+            return User.get(hash_key=request_user.email)
+        except DoesNotExist:
             return None
-
-        user = user_iterator.next()
-
-        return user if user and user.user_id and user.user_id != "" else None
 
     @staticmethod
     def check_passwords(password: str, hashed_password: str) -> bool:
@@ -70,7 +66,7 @@ class UsersService:
 
     @staticmethod
     def create_user(new_user: User) -> Optional[User]:
-        new_user.user_id = str(uuid.uuid4())
+        new_user.id = str(uuid.uuid4())
         new_user.password = UsersService.encrypt_password(new_user.password)
         new_user.last_updated = datetime.now()
 
@@ -106,14 +102,14 @@ class UsersService:
         )
 
     def get_user_by_id(self, request_user: User) -> Optional[User]:
-        user_iterator = User.query(request_user.user_id)
+        user_iterator = User.id_index.query(request_user.id)
 
         if user_iterator.total_count == 0:
             return None
 
         user = user_iterator.next()
 
-        return user if user and user.user_id and user.user_id != "" else None
+        return user if user and user.id and user.id != "" else None
 
     @staticmethod
     def update_user(self, updated_user: User) -> Optional[User]:

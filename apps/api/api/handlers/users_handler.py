@@ -78,7 +78,7 @@ def create_admin_user_handler(event: ApiGatewayEvent) -> dict:
 def update_user_handler(event: ApiGatewayEvent) -> dict:
     updated_user = User.from_camel_dict(event.body)
 
-    if event.user_id != updated_user.user_id:
+    if event.id != updated_user.id:
         return event.unauthorized_response()
 
     users_service = UsersService()
