@@ -1,0 +1,137 @@
+---
+  name: "CI"
+  on: 
+    - "push"
+  jobs: 
+    build: 
+      runs-on: "ubuntu-latest"
+      env: 
+        NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+      name: "Build"
+      steps: 
+        - 
+          name: "Checkout code"
+          uses: "actions/checkout@v2"
+        - 
+          name: "Setup AWS"
+          uses: "aws-actions/configure-aws-credentials@v1"
+          with: 
+            aws-access-key-id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+            aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+            aws-region: "us-east-2"
+        - 
+          name: "Setup node"
+          uses: "actions/setup-node@v1"
+          with: 
+            node-version: "12.18"
+        - 
+          name: "Setup python"
+          uses: "actions/setup-python@v1"
+          with: 
+            python-version: "3.8"
+        - 
+          name: "Setup script"
+          run: "./.github/workflows/setup.sh"
+        - 
+          name: "Build"
+          run: "yarn build"
+    lint: 
+      runs-on: "ubuntu-latest"
+      env: 
+        NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+      name: "Lint"
+      steps: 
+        - 
+          name: "Checkout code"
+          uses: "actions/checkout@v2"
+        - 
+          name: "Setup AWS"
+          uses: "aws-actions/configure-aws-credentials@v1"
+          with: 
+            aws-access-key-id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+            aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+            aws-region: "us-east-2"
+        - 
+          name: "Setup node"
+          uses: "actions/setup-node@v1"
+          with: 
+            node-version: "12.18"
+        - 
+          name: "Setup python"
+          uses: "actions/setup-python@v1"
+          with: 
+            python-version: "3.8"
+        - 
+          name: "Setup script"
+          run: "./.github/workflows/setup.sh"
+        - 
+          name: "Lint"
+          run: "yarn lint"
+    test: 
+      runs-on: "ubuntu-latest"
+      env: 
+        NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+      name: "Test"
+      steps: 
+        - 
+          name: "Checkout code"
+          uses: "actions/checkout@v2"
+        - 
+          name: "Setup AWS"
+          uses: "aws-actions/configure-aws-credentials@v1"
+          with: 
+            aws-access-key-id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+            aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+            aws-region: "us-east-2"
+        - 
+          name: "Setup node"
+          uses: "actions/setup-node@v1"
+          with: 
+            node-version: "12.18"
+        - 
+          name: "Setup python"
+          uses: "actions/setup-python@v1"
+          with: 
+            python-version: "3.8"
+        - 
+          name: "Setup script"
+          run: "./.github/workflows/setup.sh"
+        - 
+          name: "Test"
+          run: "yarn test"
+    publish: 
+      runs-on: "ubuntu-latest"
+      env: 
+        NPM_AUTH_TOKEN: "${{ secrets.NPM_AUTH_TOKEN }}"
+      if: "github.ref == 'refs/heads/master'"
+      needs: 
+        - "build"
+        - "test"
+      name: "Publish"
+      steps: 
+        - 
+          name: "Checkout code"
+          uses: "actions/checkout@v2"
+        - 
+          name: "Setup AWS"
+          uses: "aws-actions/configure-aws-credentials@v1"
+          with: 
+            aws-access-key-id: "${{ secrets.AWS_ACCESS_KEY_ID }}"
+            aws-secret-access-key: "${{ secrets.AWS_SECRET_ACCESS_KEY }}"
+            aws-region: "us-east-2"
+        - 
+          name: "Setup node"
+          uses: "actions/setup-node@v1"
+          with: 
+            node-version: "12.18"
+        - 
+          name: "Setup python"
+          uses: "actions/setup-python@v1"
+          with: 
+            python-version: "3.8"
+        - 
+          name: "Setup script"
+          run: "./.github/workflows/setup.sh"
+        - 
+          name: "Publish"
+          run: "yarn run lerna run publish from-package"
