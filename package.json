@@ -12,7 +12,7 @@
     "lint": "lerna run lint",
     "setup": "yarn && yarn bootstrap && yarn build && ./packages/scripts/dist/generateWorkspace.js",
     "test": "lerna run test",
-    "update-workflow": "./.github/convert.sh",
+    "update-workflow": "yarn build && ./packages/scripts/dist/githubAction.js",
 
     "test:int:dev": "lerna run test:int:dev",
     "test:int:prod": "lerna run test:int:prod",

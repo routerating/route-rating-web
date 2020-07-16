@@ -61,6 +61,11 @@ const JOB_PROPERTIES: Record<string, unknown> = {
   env: { NPM_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}' },
 }
 
+const MASTER_JOB_PROPERTIES: Record<string, unknown> = {
+  ...JOB_PROPERTIES,
+  if: IS_MASTER,
+}
+
 const JOB_SETUP: ReadonlyArray<Step> = [
   CHECKOUT,
   AWS,
@@ -74,34 +79,138 @@ const getSteps = (steps: ReadonlyArray<Step>): ReadonlyArray<Step> => [
   ...steps,
 ]
 
+const getTagStep = (
+  name: string,
+  prefix: string,
+  root: string
+): Record<string, unknown> => {
+  return {
+    name,
+    uses: 'butlerlogic/action-autotag@stable',
+    with: {
+      GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}',
+      tag_prefix: prefix,
+      root,
+    },
+  }
+}
+
+const getJob = (
+  name: string,
+  steps: ReadonlyArray<Step>,
+  needs?: ReadonlyArray<string>
+): Record<string, unknown> => ({
+  ...JOB_PROPERTIES,
+  name,
+  needs,
+  steps: getSteps(steps),
+})
+
+const getMasterJob = (
+  name: string,
+  steps: ReadonlyArray<Step>,
+  needs?: ReadonlyArray<string>
+): Record<string, unknown> => ({
+  ...MASTER_JOB_PROPERTIES,
+  name,
+  needs,
+  steps: getSteps(steps),
+})
+
 const jobs: Record<string, unknown> = {
   name: 'CI',
   on: ['push'],
   jobs: {
-    build: {
-      ...JOB_PROPERTIES,
-      name: 'Build',
-      steps: getSteps([{ name: 'Build', run: 'yarn build' }]),
-    },
-    lint: {
-      ...JOB_PROPERTIES,
-      name: 'Lint',
-      steps: getSteps([{ name: 'Lint', run: 'yarn lint' }]),
-    },
-    test: {
-      ...JOB_PROPERTIES,
-      name: 'Test',
-      steps: getSteps([{ name: 'Test', run: 'yarn test' }]),
-    },
-    publish: {
-      ...JOB_PROPERTIES,
-      if: IS_MASTER,
+    build: getJob('Build', [{ name: 'Build', run: 'yarn build' }]),
+    lint: getJob('Lint', [{ name: 'Lint', run: 'yarn lint' }]),
+    test: getJob('Test', [{ name: 'Test', run: 'yarn test' }]),
+    publish: getMasterJob(
+      'Publish',
+      [{ name: 'Publish', run: 'yarn run lerna run publish from-package' }],
+      ['build', 'test']
+    ),
+    tag: {
+      ...MASTER_JOB_PROPERTIES,
       needs: ['build', 'test'],
-      name: 'Publish',
-      steps: getSteps([
-        { name: 'Publish', run: 'yarn run lerna run publish from-package' },
-      ]),
+      name: 'Tag',
+      steps: [
+        CHECKOUT,
+        getTagStep(
+          'Tag @routerating/requests',
+          '@routerating/requests@v',
+          'packages/requests/package.json'
+        ),
+        getTagStep(
+          'Tag @routerating/components',
+          '@routerating/components@v',
+          'packages/components/package.json'
+        ),
+        getTagStep(
+          'Tag @routerating/interfaces',
+          '@routerating/interfaces@v',
+          'packages/interfaces/package.json'
+        ),
+        getTagStep(
+          'Tag @routerating/scripts',
+          '@routerating/scripts@v',
+          'packages/scripts/package.json'
+        ),
+        getTagStep(
+          'Tag @routerating/api',
+          '@routerating/api@v',
+          'apps/api/package.json'
+        ),
+        getTagStep(
+          'Tag @routerating/web',
+          '@routerating/web@v',
+          'apps/web/package.json'
+        ),
+      ],
     },
+    'deploy-dev': getMasterJob(
+      'Deploy dev',
+      [
+        {
+          name: 'Deploy dev',
+          run:
+            'JWT_SECRET=${{ secrets.JWT_SECRET }} REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} yarn deploy:dev',
+        },
+      ],
+      ['build', 'test']
+    ),
+    'integration-test-remote': getMasterJob(
+      'Integration test remote',
+      [
+        {
+          name: 'Integration test remote',
+          run:
+            'JWT_SECRET=${{ secrets.JWT_SECRET }} REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} yarn test:int:dev',
+        },
+      ],
+      ['deploy-dev']
+    ),
+    'deploy-prod': getMasterJob(
+      'Deploy prod',
+      [
+        {
+          name: 'Deploy prod',
+          run:
+            'JWT_SECRET=${{ secrets.JWT_SECRET }} REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} yarn deploy:prod',
+        },
+      ],
+      ['integration-test-remote']
+    ),
+    'smoke-test': getMasterJob(
+      'Smoke test',
+      [
+        {
+          name: 'Smoke test',
+          run:
+            'JWT_SECRET=${{ secrets.JWT_SECRET }} REFRESH_SECRET=${{ secrets.REFRESH_SECRET }} TEST_VALID_BASIC_JWT=${{ secrets.TEST_VALID_BASIC_JWT }} TEST_VALID_ADMIN_JWT=${{ secrets.TEST_VALID_ADMIN_JWT }} TEST_INVALID_JWT=${{ secrets.TEST_INVALID_JWT }} yarn test:int:prod',
+        },
+      ],
+      ['deploy-prod']
+    ),
   },
 }
 
