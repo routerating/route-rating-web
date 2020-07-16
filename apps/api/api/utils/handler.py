@@ -10,8 +10,8 @@ from api.utils.api_gateway import ApiGatewayEvent
 
 def validate_kwargs(*args):
     logging.debug("ARGS: " + str(args[0][0]))
-    if len(args[0][0]) != 2:
-        raise InvalidRequestException
+    # if len(args[0][0]) != 2:
+        # raise InvalidRequestException
 
     return args[0][0], None
 
@@ -28,7 +28,7 @@ def validate_jwt(function, event, context, admin_auth):
         if admin_auth and not auth.is_admin():
             return ApiGatewayEvent(event, context).unauthorized_response()
 
-        return function(
+        result = function(
             ApiGatewayEvent(
                 event,
                 context,
@@ -37,6 +37,9 @@ def validate_jwt(function, event, context, admin_auth):
                 headers={"Authorization": jwt_token, "Refresh": refresh_token},
             )
         )
+
+        logging.info(f"RESPONSE: {result}")
+        return result
     except Exception as e:
         logging.error("Exception raised while authenticating.")
         logging.error(traceback.format_exc())
@@ -51,8 +54,14 @@ def handler():
             try:
                 setup_logger()
                 event, context = validate_kwargs(args, kwargs)
-                return function(ApiGatewayEvent(event, context))
-            except:
+                result = function(ApiGatewayEvent(event, context))
+
+                logging.info(f"RESPONSE: {result}")
+                return result
+            except Exception as e:
+                logging.error("Exception raised while authenticating.")
+                logging.error(traceback.format_exc())
+                logging.exception(e)
                 return ApiGatewayEvent(None, None).internal_server_error_response()
 
         return wrapper
@@ -67,7 +76,10 @@ def admin_handler():
                 setup_logger()
                 event, context = validate_kwargs(args)
                 return validate_jwt(function, event, context, True)
-            except:
+            except Exception as e:
+                logging.error("Exception raised while authenticating.")
+                logging.error(traceback.format_exc())
+                logging.exception(e)
                 return ApiGatewayEvent(None, None).internal_server_error_response()
 
         return wrapper
@@ -82,7 +94,10 @@ def basic_handler():
                 setup_logger()
                 event, context = validate_kwargs(args)
                 return validate_jwt(function, event, context, False)
-            except:
+            except Exception as e:
+                logging.error("Exception raised while authenticating.")
+                logging.error(traceback.format_exc())
+                logging.exception(e)
                 return ApiGatewayEvent(None, None).internal_server_error_response()
 
         return wrapper

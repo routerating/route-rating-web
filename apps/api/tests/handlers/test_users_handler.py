@@ -1,4 +1,5 @@
 import uuid
+import logging
 from unittest.mock import patch, Mock
 
 from api.jwt import Jwt
@@ -26,13 +27,12 @@ class TestCreateUsersHandlers(TestBase):
             last_name="last",
             email="email@gmail.com",
             password="LKJ)(*098ljk",
-            username="someusername",
             city="Ames",
             state="Iowa",
             phone_number="9999999999",
             authority=None,
             role=None,
-            user_id=str(uuid.uuid4()),
+            id=str(uuid.uuid4()),
         )
 
         self.invalid_new_user = User(
@@ -40,13 +40,12 @@ class TestCreateUsersHandlers(TestBase):
             last_name="last",
             email="emailgmail.com",
             password="aa)(*098ljk",
-            username="someu)(*&^%$sername",
             city="Ames",
             state="Iowa",
             phone_number="999999999",
             authority=None,
             role=None,
-            user_id=str(uuid.uuid4()),
+            id=str(uuid.uuid4()),
         )
         self.valid_jwt_payload = {
             "email": "lukeshay",
@@ -71,11 +70,13 @@ class TestCreateUsersHandlers(TestBase):
         }
 
     def test_create_valid_basic_user(self):
-        response = OfflineHandler(create_user_handler).handle(
-            ApiGatewayEvent(body=self.valid_new_user.as_camel_dict()).as_dict()
+        response = OfflineHandler(create_user_handler).handle_v2(
+            body=self.valid_new_user.as_camel_dict()
         )
 
         user = User.from_camel_dict(response["body"])
+
+        logging.info(response["body"])
 
         self.assertEqual(200, response["statusCode"])
         self.assertEqual(self.valid_new_user.email, user.email)
@@ -85,19 +86,14 @@ class TestCreateUsersHandlers(TestBase):
         self.assertEqual(self.valid_new_user.city, user.city)
         self.assertEqual(self.valid_new_user.state, user.state)
 
-#     def test_create_missing_field_basic_user(self):
-#         response = OfflineHandler(create_user_handler).handle(
-#             ApiGatewayEvent(body={}).as_dict()
-#         )
-#         self.assertEqual({"message": "A field is missing."}, response["body"])
-#         self.assertEqual(400, response["statusCode"])
+    def test_create_missing_field_basic_user(self):
+        response = OfflineHandler(create_user_handler).handle_v2(body={})
 
-#     @patch("api.users.users_repository.UsersRepository.save")
-#     @patch("api.users.users_repository.UsersRepository.get_user_by_email")
-#     @patch("api.users.users_repository.UsersRepository.get_user_by_username")
-#     def test_create_valid_basic_user_username_and_email_taken(
-#         self, mock_get_user_by_username, mock_get_user_by_email, mock_save
-#     ):
+        self.assertEqual({"message": "A field is missing."}, response["body"])
+        self.assertEqual(400, response["statusCode"])
+
+
+#     def test_create_valid_basic_user_username_and_email_taken(self):
 #         temp_user = self.valid_new_user
 #         temp_user.id = "adsf"
 #         mock_get_user_by_username.return_value = self.valid_new_user
@@ -232,7 +228,7 @@ class TestCreateUsersHandlers(TestBase):
 #         self.update_user_handler = OfflineHandler(update_user_handler)
 
 #         self.basic_user = User(
-#             user_id=str(uuid.uuid4()),
+#             id=str(uuid.uuid4()),
 #             first_name="first",
 #             last_name="last",
 #             email="email@gmail.com",
@@ -246,7 +242,7 @@ class TestCreateUsersHandlers(TestBase):
 #         )
 
 #         self.basic_user_update = User(
-#             user_id=self.basic_user.id,
+#             id=self.basic_user.id,
 #             email="email2@gmail.com",
 #             username="someusername4",
 #             password="!$&FGHJh123ja",
@@ -260,7 +256,7 @@ class TestCreateUsersHandlers(TestBase):
 #         }
 
 #         self.admin_user = User(
-#             user_id=str(uuid.uuid4()),
+#             id=str(uuid.uuid4()),
 #             first_name="first",
 #             last_name="last",
 #             email="email@gmail.com",

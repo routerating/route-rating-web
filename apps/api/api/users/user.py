@@ -19,7 +19,7 @@ class IdIndex(GlobalSecondaryIndex):
 
 class User(Model):
     class Meta:
-        table_name = os.getenv("DYNAMODB_USERS_TABLE", "")
+        table_name = os.getenv("DYNAMODB_USERS_TABLE", "users-table")
         region = get_region()
         endpoint = get_endpoint()
         read_capacity_units = 10
