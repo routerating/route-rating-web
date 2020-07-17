@@ -5,10 +5,6 @@
       "path": "./.shadowroot"
     },
     {
-      "name": "Project Scripts",
-      "path": "scripts"
-    },
-    {
       "name": "Github Settings",
       "path": ".github"
     },
@@ -21,18 +17,140 @@
       "path": "docs"
     },
     {
-      "name": "@routerating/entities",
-      "path": "./packages/entities"
+      "name": "Configuration",
+      "path": "configs"
+    },
+    {
+      "name": "Dev Container",
+      "path": ".devcontainer"
+    },
+    {
+      "name": "@routerating/components",
+      "path": "packages/components"
+    },
+    {
+      "name": "@routerating/interfaces",
+      "path": "packages/interfaces"
     },
     {
       "name": "@routerating/requests",
-      "path": "./packages/requests"
+      "path": "packages/requests"
+    },
+    {
+      "name": "@routerating/scripts",
+      "path": "packages/scripts"
+    },
+    {
+      "name": "@routerating/stencil-styled-components",
+      "path": "packages/stencil-styled-components"
+    },
+    {
+      "name": "@routerating/.DS_Store",
+      "path": "apps/.DS_Store"
+    },
+    {
+      "name": "@routerating/api",
+      "path": "apps/api"
     },
     {
       "name": "@routerating/web",
-      "path": "./apps/web"
+      "path": "apps/web"
     }
   ],
-  "settings": [],
-  "extensions": []
+  "settings": {
+    "python.linting.enabled": true,
+    "python.formatting.provider": "black",
+    "python.pythonPath": ".venv/bin/python",
+    "python.linting.pylintEnabled": true,
+    "cSpell.words": [
+      "getenv",
+      "pynamodb"
+    ]
+  },
+  "launch": {
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Web: E2E Current",
+        "cwd": "${workspaceFolder:@routerating/web}",
+        "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+        "args": [
+          "test",
+          "--e2e",
+          "${relativeFile}"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "disableOptimisticBPs": true
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Web: Spec Current",
+        "cwd": "${workspaceFolder:@routerating/web}",
+        "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+        "args": [
+          "test",
+          "--spec",
+          "${relativeFile}"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "disableOptimisticBPs": true
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Web: Start",
+        "cwd": "${workspaceFolder:@routerating/web}",
+        "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+        "args": [
+          "build",
+          "--dev",
+          "--watch",
+          "--serve"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "disableOptimisticBPs": true
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Web: Build",
+        "cwd": "${workspaceFolder:@routerating/web}",
+        "program": "${workspaceFolder:@routerating/web}/node_modules/.bin/stencil",
+        "args": [
+          "build",
+          "--prerender",
+          "--log",
+          "--stats"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "disableOptimisticBPs": true
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "API: Start",
+        "cwd": "${workspaceFolder:@routerating/api}",
+        "program": "${workspaceFolder:@routerating/api}/node_modules/.bin/serverless",
+        "args": [
+          "offline",
+          "start",
+          "--location",
+          "."
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "disableOptimisticBPs": true
+      }
+    ]
+  },
+  "extensions": {
+    "recommendations": [],
+    "unwantedRecommendations": []
+  }
 }

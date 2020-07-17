@@ -1,0 +1,6 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "./tsconfig.json",
+  "exclude": ["**/*.spec.ts", "**/*.e2e.ts"],
+  "include": ["src"]
+}

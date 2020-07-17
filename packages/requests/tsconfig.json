@@ -1,13 +1,18 @@
 {
-  "extends": "../../tsconfig.build.json",
+  "$schema": "http://json.schemastore.org/tsconfig",
   "compilerOptions": {
-    "outDir": "./dist",
+    "composite": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
     "rootDir": "./src"
   },
-  "include": ["src/**/*"],
+  "extends": "../../configs/tsconfig.json",
+  "include": [
+    "src"
+  ],
   "references": [
     {
-      "path": "../entities/tsconfig.json"
+      "path": "../interfaces/tsconfig.json"
     }
   ]
 }

@@ -5,31 +5,26 @@
   "repository": "https://github.com/LukeShay/route-rating-web.git",
   "author": "Luke Shay <https://github.com/LukeShay>",
   "license": "MIT",
-  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "scripts": {
+    "prebuild": "yarn clean",
     "build": "rollup -c",
     "format": "yarn lint --fix",
-    "lint": "eslint src/ --ext .ts --ignore-path ../../.gitignore . ",
+    "lint": "eslint . --ignore-path ../../.gitignore",
     "test": "jest",
-    "test:cov": "jest --coverage",
     "watch": "rollup -cw",
-    "clean": "find . -name *.log -delete && rm -rf dist coverage junit.xml"
-  },
-  "publishConfig": {
-    "access": "public",
-    "registry": "https://registry.npmjs.org/"
+    "clean": "rm -rf dist coverage junit.xml *.log",
+    "prepublishOnly": "yarn build"
   },
   "input": "src/index.ts",
   "main": "dist/cjs/index.js",
-  "esm": "dist/es/index.js",
-  "cjs": "dist/cjs/index.js",
-  "types": "dist/cjs/index.d.ts",
-  "exports": {
-    "require": "./dist/cjs/index.js",
-    "import": "./dist/es/index.js"
-  },
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
   "dependencies": {
-    "@routerating/entities": "^0.0.3"
+    "@routerating/interfaces": "^0.0.3",
+    "tslib": "^2.0.0"
   },
   "files": [
     "dist",

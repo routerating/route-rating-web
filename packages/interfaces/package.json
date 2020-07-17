@@ -1,0 +1,32 @@
+{
+  "name": "@routerating/interfaces",
+  "version": "0.0.3",
+  "description": "Interfaces package for Route Rating.",
+  "repository": "https://github.com/LukeShay/route-rating-web.git",
+  "author": "Luke Shay <https://github.com/LukeShay>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "prebuild": "yarn clean",
+    "build": "rollup -c",
+    "format": "yarn lint --fix",
+    "lint": "eslint . --ignore-path ../../.gitignore",
+    "clean": "rm -rf dist coverage junit.xml *.log",
+    "prepublishOnly": "yarn build"
+  },
+  "input": "src/index.ts",
+  "main": "dist/cjs/index.js",
+  "module": "dist/es/index.js",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "CHANGELOG.md"
+  ],
+  "keywords": [
+    "typescript",
+    "route-rating"
+  ]
+}

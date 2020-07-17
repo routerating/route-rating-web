@@ -1,0 +1,125 @@
+service: route-rating-serverless
+frameworkVersion: ">=1.2.0 <2.0.0"
+plugins:
+  - serverless-python-requirements
+  - serverless-offline
+  - serverless-dynamodb-local
+custom:
+  pythonRequirements:
+    layer: true
+  dynamodb:
+    start:
+      inMemory: false
+    stages:
+      - dev
+package:
+  exclude:
+    - ./**
+  include:
+    - ./api/**
+x-common-lambda-properties: &common-lambda-properties
+  layers:
+    - { Ref: PythonRequirementsLambdaLayer }
+provider:
+  name: aws
+  runtime: python3.8
+  region: ${opt:region, 'us-east-2'}
+  stage: ${opt:stage, 'dev'}
+  stackName: ${self:service}-${self:provider.stage}
+  versionFunctions: true
+  role: arn:aws:iam::816188110262:role/LambdaRole
+  memorySize: 512
+  tags:
+    service: route-rating-serverless
+  deploymentBucket:
+    name: ${self:service}-builds-${self:provider.stage}
+    blockPublicAccess: true
+  environment:
+    DYNAMODB_USERS_TABLE: ${self:service}-users-${self:provider.stage}
+    JWT_SECRET: ${env:JWT_SECRET}
+    REFRESH_SECRET: ${env:REFRESH_SECRET}
+    LOG: TRUE
+    AWS_REGION: ${self:provider.region}
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:CreateTable
+        - dynamodb:DescribeTable
+        - dynamodb:UpdateTable
+      Resource: arn:aws:dynamodb:${self:provider.region}:*:table/*
+    - Effect: Allow
+      Action:
+        - logs:CreateLogGroup
+        - logs:CreateLogStream
+        - logs:PutLogEvents
+        - dynamodb:ListTables
+      Resource: "*"
+functions:
+  # Auth Functions
+  BasicAuth:
+    name: ${self:service}-basic-auth-${self:provider.stage}
+    <<: *common-lambda-properties
+    handler: api/handlers/auth_handler.basic_auth_handler
+    tags:
+      service: auth-api
+    events:
+      - http:
+          path: auth/basic
+          method: post
+  AdminAuth:
+    name: ${self:service}-admin-auth-${self:provider.stage}
+    <<: *common-lambda-properties
+    handler: api/handlers/auth_handler.admin_auth_handler
+    tags:
+      service: auth-api
+    events:
+      - http:
+          path: auth/admin
+          method: post
+  Login:
+    name: ${self:service}-login-${self:provider.stage}
+    <<: *common-lambda-properties
+    handler: api/handlers/auth_handler.login_handler
+    tags:
+      service: login-api
+    events:
+      - http:
+          path: auth/login
+          method: post
+  # Users Functions
+  CreateUser:
+    name: ${self:service}-create-user-${self:provider.stage}
+    <<: *common-lambda-properties
+    handler: api/handlers/users_handler.create_user_handler
+    tags:
+      service: users-api
+    events:
+      - http:
+          path: users/create
+          method: post
+  CreateAdminUser:
+    name: ${self:service}-create-admin-user-${self:provider.stage}
+    <<: *common-lambda-properties
+    handler: api/handlers/users_handler.create_admin_user_handler
+    tags:
+      service: users-api
+    events:
+      - http:
+          path: users/create/admin
+          method: post
+  UpdateUser:
+    name: ${self:service}-update-user-${self:provider.stage}
+    <<: *common-lambda-properties
+    handler: api/handlers/users_handler.update_user_handler
+    tags:
+      service: users-api
+    events:
+      - http:
+          path: users
+          method: put

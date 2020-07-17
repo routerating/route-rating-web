@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  app:
+    user: vscode
+    build:
+      context: ..
+      dockerfile: .devcontainer/Dockerfile
+    volumes:
+      - ..:/workspace:cached
+    ports:
+      - "3000:3000"
+      - "3333:3333"
+  nginx:
+    build:
+      context: ..
+      dockerfile: .devcontainer/nginx/Dockerfile
+    ports:
+      - "81:80"
+    environment:
+      - NGINX_HOST=localhost
+      - NGINX_PORT=80

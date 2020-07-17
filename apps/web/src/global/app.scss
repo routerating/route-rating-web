@@ -1,0 +1,74 @@
+html {
+  font-family: "Arial", "Helvetica", "sans-serif";
+  font-size: 1rem;
+
+  @include tablet {
+    font-size: 14px;
+  }
+}
+
+body {
+  display: block;
+  color: #333;
+  margin: 0;
+  background: #f7f7f7;
+}
+
+button {
+  display: block;
+  border: none;
+  padding: 0.5rem .75rem;
+  border-radius: 5px;
+  margin: .5rem 0;
+  cursor: pointer;
+  font-size: inherit;
+  transition: background .15s linear;
+  min-width: 100px;
+  min-height: 40px;
+
+  @include tablet {
+    min-height: 30px;
+  }
+
+  &.purple-button {
+    background: $purple;
+    color: #fff;
+
+    &:hover, &.active {
+      background: darken($purple, 10%);
+    }
+
+    &:disabled, &:disabled:hover {
+      background: #efefef;
+      color: #ccc;
+      cursor: default;
+    }
+  }
+
+  &.blue-button {
+    background: $blue;
+    color: #fff;
+
+    &:hover, &.active {
+      background: darken($blue, 10%);
+    }
+
+    &:disabled, &:disabled:hover {
+      background: #efefef;
+      color: #ccc;
+      cursor: default;
+    }
+  }
+}
+
+.centered {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+  color: #2369ff;
+}

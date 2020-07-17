@@ -1,35 +1,23 @@
 {
-  "compilerOptions": {
-    "allowSyntheticDefaultImports": true,
-    "allowUnreachableCode": false,
-    "declaration": false,
-    "experimentalDecorators": true,
-    "lib": [
-      "dom",
-      "es2017"
-    ],
-    "moduleResolution": "node",
-    "module": "esnext",
-    "target": "es2017",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "jsx": "react",
-    "jsxFactory": "h"
-  },
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "extends": "../../configs/tsconfig.json",
   "include": [
     "src",
-    "types/jsx.d.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "**/__tests__"
+    "stencil.config.ts",
+    "prerender.config.ts"
   ],
   "references": [
     {
-      "path": "../../packages/entities/tsconfig.json"
+      "path": "../../packages/interfaces/tsconfig.json"
     },
     {
       "path": "../../packages/requests/tsconfig.json"
+    },
+    {
+      "path": "../../packages/components/tsconfig.build.json"
+    },
+    {
+      "path": "../../packages/stencil-styled-components/tsconfig.json"
     }
   ]
 }

@@ -1,0 +1,18 @@
+{
+  "name": "@routerating/scripts",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "prebuild": "yarn clean",
+    "build": "tsc",
+    "postbuild": "for f in dist/*; do (echo '#!/usr/bin/env node\n' && cat $f) > dist/temp && mv dist/temp $f; done && chmod 755 dist/*",
+    "clean": "rm -rf dist/",
+    "lint": "eslint . --ignore-path ../../.gitignore",
+    "format": "yarn lint --fix"
+  },
+  "devDependencies": {
+    "chalk": "^4.1.0",
+    "json2yaml": "^1.1.0"
+  }
+}

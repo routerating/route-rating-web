@@ -1,19 +1,36 @@
 import { createJsonRequest, sendRequest } from '../utils'
 
-import { User } from '@routerating/entities'
+import { BaseUser } from '@routerating/interfaces/dist/types/user'
+import { User } from '@routerating/interfaces'
 
-export function login(email: string, password: string): Promise<Response> {
+export function login(
+  url: string,
+  email: string,
+  password: string
+): Promise<Response> {
   return sendRequest(
-    createJsonRequest('auth/login', undefined, 'POST', undefined, undefined, {
-      email,
-      password,
-    })
+    createJsonRequest(
+      url,
+      'auth/login',
+      undefined,
+      'POST',
+      undefined,
+      undefined,
+      {
+        email,
+        password,
+      }
+    )
   )
 }
 
-export function createBasicUser(user: User): Promise<Response> {
+export function createBasicUser(
+  url: string,
+  user: BaseUser
+): Promise<Response> {
   return sendRequest(
     createJsonRequest(
+      url,
       'users/create',
       undefined,
       'POST',
@@ -25,12 +42,14 @@ export function createBasicUser(user: User): Promise<Response> {
 }
 
 export function createAdminUser(
-  user: User,
+  url: string,
+  user: BaseUser,
   authorization?: string,
   refresh?: string
 ): Promise<Response> {
   return sendRequest(
     createJsonRequest(
+      url,
       'users/create/admin',
       undefined,
       'POST',
@@ -41,8 +60,16 @@ export function createAdminUser(
   )
 }
 
-export function updateUser(user: User): Promise<Response> {
+export function updateUser(url: string, user: User): Promise<Response> {
   return sendRequest(
-    createJsonRequest('users', undefined, 'PUT', undefined, undefined, user)
+    createJsonRequest(
+      url,
+      'users',
+      undefined,
+      'PUT',
+      undefined,
+      undefined,
+      user
+    )
   )
 }

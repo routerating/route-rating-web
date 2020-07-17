@@ -1,0 +1,29 @@
+{
+  "name": "api",
+  "version": "0.0.1",
+  "description": "Serverless HTTP services for Route Rating.",
+  "author": "Luke Shay <https://github.com/LukeShay>",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "clean": "rm -rf .pytest_cache test_output .coverage rli.egg-info .pytest_cache .scannerwork .serverless route-rating.log .mypy_cache && find . -name \"__pycache__\" | xargs rm -rf",
+    "predeploy": "yarn clean",
+    "deploy:dev": "serverless deploy --stage dev",
+    "deploy:prod": "serverless deploy --stage prod",
+    "pretest": "yarn clean",
+    "test": "yarn test:unit && yarn test:int:local",
+    "test:unit": "python -m pytest",
+    "test:int:local": "./tests/integration/test.sh test-local dev",
+    "test:int:dev": "./tests/integration/test.sh test-remote dev",
+    "test:int:prod": "./tests/integration/test.sh test-remote prod",
+    "format": "python -m black api/ tests/",
+    "lint": "python -m black --check api/ tests/ && python -m mypy api --ignore-missing-imports --no-warn-no-return --warn-unreachable",
+    "start": "serverless offline start --location ."
+  },
+  "devDependencies": {
+    "serverless": "^1.74.1",
+    "serverless-dynamodb-local": "^0.2.39",
+    "serverless-offline": "^6.4.0",
+    "serverless-python-requirements": "^5.1.0"
+  }
+}

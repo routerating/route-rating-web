@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-profile-page should match snapshot 1`] = `
+<app-profile-page>
+  <mock:shadow-root>
+    <h1>
+      Profile
+    </h1>
+  </mock:shadow-root>
+</app-profile-page>
+`;

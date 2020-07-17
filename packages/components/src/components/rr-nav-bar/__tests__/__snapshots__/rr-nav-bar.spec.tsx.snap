@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`rr-nav-bar should match snapshot 1`] = `
+<rr-nav-bar>
+  <!---->
+  <ul>
+    <rr-nav-link url="asdf">
+      <!---->
+      <li>
+        <stencil-route-link activeclass="active" exact="" url="asdf">
+          URL
+        </stencil-route-link>
+      </li>
+    </rr-nav-link>
+    &lt;rr-nav-link url="asdf"&gt;&lt;!----&gt;URL&lt;/rr-nav-link&gt;
+  </ul>
+</rr-nav-bar>
+`;

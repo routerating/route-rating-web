@@ -5,33 +5,46 @@
  * It contains typing information for all components that exist in this project.
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { MatchResults } from "@stencil/router";
 export namespace Components {
+    interface AppForm {
+    }
     interface AppHome {
     }
-    interface AppProfile {
-        /**
-          * Comment
-         */
-        "match": MatchResults;
+    interface AppNavigation {
+    }
+    interface AppProfilePage {
     }
     interface AppRoot {
     }
-    interface RrNavigation {
+    interface AppSignInPage {
+    }
+    interface AppSignUpPage {
     }
 }
 declare global {
+    interface HTMLAppFormElement extends Components.AppForm, HTMLStencilElement {
+    }
+    var HTMLAppFormElement: {
+        prototype: HTMLAppFormElement;
+        new (): HTMLAppFormElement;
+    };
     interface HTMLAppHomeElement extends Components.AppHome, HTMLStencilElement {
     }
     var HTMLAppHomeElement: {
         prototype: HTMLAppHomeElement;
         new (): HTMLAppHomeElement;
     };
-    interface HTMLAppProfileElement extends Components.AppProfile, HTMLStencilElement {
+    interface HTMLAppNavigationElement extends Components.AppNavigation, HTMLStencilElement {
     }
-    var HTMLAppProfileElement: {
-        prototype: HTMLAppProfileElement;
-        new (): HTMLAppProfileElement;
+    var HTMLAppNavigationElement: {
+        prototype: HTMLAppNavigationElement;
+        new (): HTMLAppNavigationElement;
+    };
+    interface HTMLAppProfilePageElement extends Components.AppProfilePage, HTMLStencilElement {
+    }
+    var HTMLAppProfilePageElement: {
+        prototype: HTMLAppProfilePageElement;
+        new (): HTMLAppProfilePageElement;
     };
     interface HTMLAppRootElement extends Components.AppRoot, HTMLStencilElement {
     }
@@ -39,47 +52,64 @@ declare global {
         prototype: HTMLAppRootElement;
         new (): HTMLAppRootElement;
     };
-    interface HTMLRrNavigationElement extends Components.RrNavigation, HTMLStencilElement {
+    interface HTMLAppSignInPageElement extends Components.AppSignInPage, HTMLStencilElement {
     }
-    var HTMLRrNavigationElement: {
-        prototype: HTMLRrNavigationElement;
-        new (): HTMLRrNavigationElement;
+    var HTMLAppSignInPageElement: {
+        prototype: HTMLAppSignInPageElement;
+        new (): HTMLAppSignInPageElement;
+    };
+    interface HTMLAppSignUpPageElement extends Components.AppSignUpPage, HTMLStencilElement {
+    }
+    var HTMLAppSignUpPageElement: {
+        prototype: HTMLAppSignUpPageElement;
+        new (): HTMLAppSignUpPageElement;
     };
     interface HTMLElementTagNameMap {
+        "app-form": HTMLAppFormElement;
         "app-home": HTMLAppHomeElement;
-        "app-profile": HTMLAppProfileElement;
+        "app-navigation": HTMLAppNavigationElement;
+        "app-profile-page": HTMLAppProfilePageElement;
         "app-root": HTMLAppRootElement;
-        "rr-navigation": HTMLRrNavigationElement;
+        "app-sign-in-page": HTMLAppSignInPageElement;
+        "app-sign-up-page": HTMLAppSignUpPageElement;
     }
 }
 declare namespace LocalJSX {
+    interface AppForm {
+    }
     interface AppHome {
     }
-    interface AppProfile {
-        /**
-          * Comment
-         */
-        "match"?: MatchResults;
+    interface AppNavigation {
+    }
+    interface AppProfilePage {
     }
     interface AppRoot {
     }
-    interface RrNavigation {
+    interface AppSignInPage {
+    }
+    interface AppSignUpPage {
     }
     interface IntrinsicElements {
+        "app-form": AppForm;
         "app-home": AppHome;
-        "app-profile": AppProfile;
+        "app-navigation": AppNavigation;
+        "app-profile-page": AppProfilePage;
         "app-root": AppRoot;
-        "rr-navigation": RrNavigation;
+        "app-sign-in-page": AppSignInPage;
+        "app-sign-up-page": AppSignUpPage;
     }
 }
 export { LocalJSX as JSX };
 declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
+            "app-form": LocalJSX.AppForm & JSXBase.HTMLAttributes<HTMLAppFormElement>;
             "app-home": LocalJSX.AppHome & JSXBase.HTMLAttributes<HTMLAppHomeElement>;
-            "app-profile": LocalJSX.AppProfile & JSXBase.HTMLAttributes<HTMLAppProfileElement>;
+            "app-navigation": LocalJSX.AppNavigation & JSXBase.HTMLAttributes<HTMLAppNavigationElement>;
+            "app-profile-page": LocalJSX.AppProfilePage & JSXBase.HTMLAttributes<HTMLAppProfilePageElement>;
             "app-root": LocalJSX.AppRoot & JSXBase.HTMLAttributes<HTMLAppRootElement>;
-            "rr-navigation": LocalJSX.RrNavigation & JSXBase.HTMLAttributes<HTMLRrNavigationElement>;
+            "app-sign-in-page": LocalJSX.AppSignInPage & JSXBase.HTMLAttributes<HTMLAppSignInPageElement>;
+            "app-sign-up-page": LocalJSX.AppSignUpPage & JSXBase.HTMLAttributes<HTMLAppSignUpPageElement>;
         }
     }
 }

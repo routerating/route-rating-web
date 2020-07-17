@@ -3,30 +3,41 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "test": "lerna run test",
+    "bootstrap": "lerna bootstrap",
     "build": "lerna run build",
+    "bump": "HUSKY_BYPASS=true lerna version --no-git-tag-version --no-push",
+    "postbump": "git add . && git commit -m 'chore: bump version'",
     "clean": "lerna run clean",
-    "lint": "lerna run lint",
     "format": "lerna run format",
-    "postinstall": "lerna bootstrap",
-    "setup": "yarn && ./scripts/generate_vscode_workspace.sh"
+    "lint": "lerna run lint",
+    "setup": "yarn && yarn bootstrap && yarn build && ./packages/scripts/dist/generateWorkspace.js",
+    "test": "lerna run test",
+    "update-workflow": "yarn build && ./packages/scripts/dist/githubAction.js",
+
+    "test:int:dev": "lerna run test:int:dev",
+    "test:int:prod": "lerna run test:int:prod",
+    "deploy:dev": "lerna run deploy:dev",
+    "deploy:prod": "lerna run deploy:prod"
   },
   "devDependencies": {
-    "@commitlint/cli": "^8.3.5",
-    "@commitlint/config-conventional": "^8.3.4",
-    "@lukeshay/eslint-config-typescript": "^1.0.3",
-    "@lukeshay/rollup-config": "^0.0.4",
-    "@lukeshay/typescript-config": "^1.0.1",
-    "@types/jest": "^26.0.0",
+    "@commitlint/cli": "^9.0.1",
+    "@commitlint/config-lerna-scopes": "^9.0.1",
+    "@lukeshay/eslint-config-typescript": "^1.0.4",
+    "@lukeshay/rollup-config": "^0.2.0",
+    "@stencil/eslint-plugin": "^0.3.1",
+    "@types/jest": "^26.0.3",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
     "cross-env": "^7.0.2",
-    "eslint-plugin-jest": "^23.13.2",
+    "eslint": "^7.3.1",
+    "eslint-plugin-jest": "^23.17.1",
+    "eslint-plugin-react": "^7.20.1",
     "husky": "^4.2.5",
-    "jest": "^26.0.1",
-    "jest-junit": "^10.0.0",
+    "jest": "^26.1.0",
+    "jest-junit": "^11.0.1",
     "lerna": "^3.22.1",
-    "rollup": "^2.16.1",
-    "ts-jest": "^26.1.0",
-    "typescript": "^3.9.2"
+    "npm-check-updates": "^7.0.1",
+    "rollup": "^2.18.1",
+    "typescript": "^3.9.5"
   },
   "workspaces": [
     "packages/*",
@@ -34,12 +45,13 @@
   ],
   "husky": {
     "hooks": {
+      "pre-stage": "yarn format",
       "commit-msg": "[[ -n $HUSKY_BYPASS ]] || commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "commitlint": {
     "extends": [
-      "@commitlint/config-conventional"
+      "@commitlint/config-lerna-scopes"
     ],
     "rules": {
       "type-enum": [
@@ -59,5 +71,6 @@
         ]
       ]
     }
-  }
+  },
+  "version": "0.0.0"
 }

@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "declarationDir": "dist/types",
+    "rootDir": "./src"
+  },
+  "extends": "../../configs/tsconfig.json",
+  "include": [
+    "src"
+  ]
+}

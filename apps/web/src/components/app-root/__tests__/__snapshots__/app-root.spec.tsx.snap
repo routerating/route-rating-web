@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`app-profile should match snapshot 1`] = `
+<app-root>
+  <mock:shadow-root>
+    <app-navigation></app-navigation>
+    <main>
+      <stencil-router>
+        <stencil-route-switch scrolltopoffset="0">
+          <stencil-route component="app-home" exact="" url="/"></stencil-route>
+          <stencil-route component="app-home" url="/gyms"></stencil-route>
+          <stencil-route url="/profile"></stencil-route>
+          <stencil-route component="app-sign-in-page" url="/login"></stencil-route>
+        </stencil-route-switch>
+      </stencil-router>
+    </main>
+    <div id="snackbar"></div>
+  </mock:shadow-root>
+</app-root>
+`;
