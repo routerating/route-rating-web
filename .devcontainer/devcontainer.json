@@ -1,0 +1,31 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json or this file's README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.128.0/containers/java-8
+{
+	"name": "Route Rating",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "app",
+	"workspaceFolder": "/workspace",
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+	},
+	"remoteEnv": {
+		"NPM_AUTH_TOKEN": "fake-npm-auth-token",
+		"JWT_SECRET": "MFwwDQYJKoZIhvcNAQEBBQADSwAwSAJBAMFrpQN/bqKzc0qsbCOkn7uJ/zkJyJkt",
+		"REFRESH_SECRET": "AF3GtW1sHBJrFZwLVfInKXfWWDxkzT7Z2NM4Ju9yULPnHrouZLVQANsCAwEAAQ=="
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"vscjava.vscode-java-pack"
+	],
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "java -version",
+
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}

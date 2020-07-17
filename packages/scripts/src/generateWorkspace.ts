@@ -12,6 +12,7 @@ const workspace = {
     { name: 'VS Code Settings', path: '.vscode' },
     { name: 'Documentation', path: 'docs' },
     { name: 'Configuration', path: 'configs' },
+    { name: 'Dev Container', path: '.devcontainer' },
   ],
   settings: JSON.parse(getFileOrDefault('./.vscode/settings.json')),
   launch: JSON.parse(getFileOrDefault('./.vscode/launch.json')),

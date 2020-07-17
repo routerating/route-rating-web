@@ -21,6 +21,10 @@
       "path": "configs"
     },
     {
+      "name": "Dev Container",
+      "path": ".devcontainer"
+    },
+    {
       "name": "@routerating/components",
       "path": "packages/components"
     },
@@ -122,6 +126,22 @@
           "--prerender",
           "--log",
           "--stats"
+        ],
+        "console": "integratedTerminal",
+        "internalConsoleOptions": "neverOpen",
+        "disableOptimisticBPs": true
+      },
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "API: Start",
+        "cwd": "${workspaceFolder:@routerating/api}",
+        "program": "${workspaceFolder:@routerating/api}/node_modules/.bin/serverless",
+        "args": [
+          "offline",
+          "start",
+          "--location",
+          "."
         ],
         "console": "integratedTerminal",
         "internalConsoleOptions": "neverOpen",
